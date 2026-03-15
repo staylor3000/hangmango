@@ -398,18 +398,6 @@ body {
   transition: filter 0.5s ease;
 }
 
-/* Scene jolt on every wrong guess — JS adds/removes this class */
-#mango-scene.jolt {
-  animation: sceneJolt 0.35s ease;
-}
-
-@keyframes sceneJolt {
-  0%,100% { transform: none; }
-  25%     { transform: rotate(-2deg) scale(1.03); }
-  50%     { transform: rotate(2.5deg) scale(1.05); }
-  75%     { transform: rotate(-1deg) scale(1.02); }
-}
-
 /* Progressive danger glow */
 #mango-scene[data-state="3"] { filter: drop-shadow(0 0 5px rgba(255,213,0,0.45)); }
 #mango-scene[data-state="4"] { filter: drop-shadow(0 0 9px rgba(255,140,42,0.55)); }
@@ -421,60 +409,113 @@ body {
   to   { filter: drop-shadow(0 0 16px rgba(229,57,53,0.75)); }
 }
 
-/* Branch */
-.branch-wrap {
+/* ── Tree ─────────────────────────────────── */
+.tree-wrap {
   position: absolute;
-  top: 8px;
-  left: 10px;
-  right: 10px;
+  bottom: 14px;
+  left: 30px; /* (180 - 120) / 2 */
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: bottom center;
 }
 
-.branch-bark {
-  height: 16px;
-  background: linear-gradient(180deg, #8B6340 0%, #6B4A2A 100%);
-  border-radius: 8px;
-  transform-origin: left center;
+.canopy {
+  width: 120px;
+  height: 90px;
+  background: linear-gradient(150deg, #56C05A 0%, #237a2b 100%);
+  border-radius: 55% 55% 45% 45% / 60% 60% 40% 40%;
+  box-shadow: inset -10px -14px 22px rgba(0,0,0,0.15),
+              inset 6px 8px 16px rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 12px;
 }
 
-.branch-leaves {
-  position: absolute;
-  top: -20px;
-  left: 12px;
-  font-size: 1.5rem;
+.mango-in-tree {
+  font-size: 2.4rem;
+  line-height: 1;
   font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  transition: opacity 0.15s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+.trunk {
+  width: 22px;
+  height: 68px;
+  background: linear-gradient(180deg, #8B6340 0%, #6B4A2A 100%);
+  border-radius: 4px 4px 2px 2px;
+}
+
+/* Hide canopy mango once it falls */
+[data-state="6"] .mango-in-tree { opacity: 0; }
+
+/* ── Tree wobble — JS adds class matching wrong count ── */
+.tree-wrap.wobble-1 { animation: treeWobble1 0.55s ease; }
+.tree-wrap.wobble-2 { animation: treeWobble2 0.60s ease; }
+.tree-wrap.wobble-3 { animation: treeWobble3 0.65s ease; }
+.tree-wrap.wobble-4 { animation: treeWobble4 0.70s ease; }
+.tree-wrap.wobble-5 { animation: treeWobble5 0.75s ease; }
+
+@keyframes treeWobble1 {
+  0%,100% { transform: rotate(0deg); }
+  20%  { transform: rotate(-3deg); }
+  55%  { transform: rotate(2.5deg); }
+  80%  { transform: rotate(-1deg); }
+}
+@keyframes treeWobble2 {
+  0%,100% { transform: rotate(0deg); }
+  20%  { transform: rotate(-5deg); }
+  55%  { transform: rotate(4deg); }
+  80%  { transform: rotate(-2deg); }
+}
+@keyframes treeWobble3 {
+  0%,100% { transform: rotate(0deg); }
+  20%  { transform: rotate(-8deg); }
+  55%  { transform: rotate(6deg); }
+  80%  { transform: rotate(-3deg); }
+}
+@keyframes treeWobble4 {
+  0%,100% { transform: rotate(0deg); }
+  20%  { transform: rotate(-11deg); }
+  55%  { transform: rotate(8.5deg); }
+  80%  { transform: rotate(-4deg); }
+}
+@keyframes treeWobble5 {
+  0%,100% { transform: rotate(0deg); }
+  20%  { transform: rotate(-15deg); }
+  55%  { transform: rotate(12deg); }
+  80%  { transform: rotate(-5deg); }
+}
+
+/* ── Falling mango (state 6) ──────────────── */
+/* Hidden until state 6; positioned to match the mango-in-tree */
+.mango-fruit {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.4rem;
+  line-height: 1;
+  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  opacity: 0;
   pointer-events: none;
 }
 
-/* String */
-.hang-string {
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  width: 3px;
-  height: 46px;
-  background: #6B4A2A;
-  transform: translateX(-50%);
-  transform-origin: top center;
-  transition: height 0.5s ease, opacity 0.5s ease, transform 0.4s ease;
-  border-radius: 2px;
+[data-state="6"] .mango-fruit {
+  animation: mangoFall 0.7s cubic-bezier(0.42,0,1,1) forwards;
 }
 
-/* Mango */
-.mango-fruit {
-  position: absolute;
-  top: 68px;
-  left: 50%;
-  font-size: 3.4rem;
-  line-height: 1;
-  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
-  transform: translateX(-50%);
-  transform-origin: top center;
-  transition: top 0.5s cubic-bezier(0.42,0,1,1),
-              transform 0.4s ease,
-              opacity 0.3s ease;
+@keyframes mangoFall {
+  0%   { opacity: 1; top: 50px;  transform: translateX(-50%) rotate(0deg); }
+  70%  { opacity: 1; top: 158px; transform: translateX(-50%) rotate(210deg); }
+  82%  { top: 150px; transform: translateX(calc(-50% - 5px)) rotate(195deg) scaleY(0.55) scaleX(1.4); }
+  100% { opacity: 0; top: 155px; transform: translateX(calc(-50% - 5px)) rotate(200deg); }
 }
 
-/* Ground */
+/* ── Ground ──────────────────────────────── */
 .ground-line {
   position: absolute;
   bottom: 8px;
@@ -484,111 +525,25 @@ body {
   border-radius: 3px;
 }
 
-/* Splat */
+/* ── Splat ───────────────────────────────── */
 .splat-emoji {
   display: none;
   position: absolute;
   bottom: 12px;
   left: 50%;
-  transform: translateX(-50%) scale(0);
   font-size: 2.8rem;
   font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
-  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
 
-/* ── Mango state transitions ──────────────── */
-
-/* State 1: branch shakes (class-triggered animation) */
-.branch-bark.shake {
-  animation: branchShake 0.55s ease;
-}
-
-/* State 2: mango tilts / loosens */
-[data-state="2"] .mango-fruit {
-  transform: translateX(-50%) rotate(18deg);
-}
-[data-state="2"] .hang-string {
-  transform: translateX(-50%) skewX(8deg);
-}
-
-/* State 3: mango dropping, string stretches then snaps */
-[data-state="3"] .mango-fruit {
-  top: 105px;
-  transform: translateX(-50%) rotate(35deg);
-}
-[data-state="3"] .hang-string {
-  height: 70px;
-}
-
-/* State 4: mango hits ground */
-[data-state="4"] .mango-fruit {
-  top: 152px;
-  transform: translateX(-50%) rotate(60deg);
-}
-[data-state="4"] .hang-string {
-  height: 0;
-  opacity: 0;
-}
-
-/* State 5: mango squished */
-[data-state="5"] .mango-fruit {
-  top: 162px;
-  transform: translateX(calc(-50% - 8px)) rotate(80deg) scaleX(1.35) scaleY(0.65);
-}
-[data-state="5"] .hang-string { height: 0; opacity: 0; }
-
-/* State 6: full splat! */
-[data-state="6"] .mango-fruit {
-  opacity: 0;
-}
-[data-state="6"] .hang-string { height: 0; opacity: 0; }
 [data-state="6"] .splat-emoji {
   display: block;
-  transform: translateX(-50%) scale(1);
-  animation: splatIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
-}
-
-/* ── Keyframes ────────────────────────────── */
-@keyframes branchShake {
-  0%,100% { transform: rotate(0deg); }
-  15% { transform: rotate(-5deg); }
-  35% { transform: rotate(4deg); }
-  55% { transform: rotate(-3deg); }
-  75% { transform: rotate(2deg); }
+  animation: splatIn 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.58s both;
 }
 
 @keyframes splatIn {
   0%   { transform: translateX(-50%) scale(0); opacity: 0; }
   60%  { transform: translateX(-50%) scale(1.3); opacity: 1; }
   100% { transform: translateX(-50%) scale(1); opacity: 1; }
-}
-
-@keyframes bounce {
-  0%,100% { transform: translateX(-50%) scaleY(1); }
-  40%     { transform: translateX(-50%) scaleY(0.7) scaleX(1.25); }
-  70%     { transform: translateX(-50%) scaleY(1.1) scaleX(0.95); }
-}
-
-/* State-4 squash-and-stretch hit — JS adds this class when mango lands */
-.mango-fruit.mango-bounce {
-  animation: mangoHit 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
-}
-
-@keyframes mangoHit {
-  0%   { transform: translateX(-50%) rotate(60deg) scaleY(1)    scaleX(1); }
-  35%  { transform: translateX(-50%) rotate(60deg) scaleY(0.55) scaleX(1.5); }
-  65%  { transform: translateX(-50%) rotate(60deg) scaleY(1.2)  scaleX(0.88); }
-  100% { transform: translateX(-50%) rotate(60deg) scaleY(1)    scaleX(1); }
-}
-
-/* State-5: mango pulses with danger tint */
-[data-state="5"] .mango-fruit {
-  animation: mangoDanger 0.55s ease infinite alternate;
-}
-
-@keyframes mangoDanger {
-  from { filter: brightness(1) saturate(1); }
-  to   { filter: brightness(1.35) saturate(1.6) drop-shadow(0 0 6px rgba(229,57,53,0.6)); }
 }
 
 /* ── Word Panel ──────────────────────────────────────────────────────── */

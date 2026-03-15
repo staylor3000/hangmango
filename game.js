@@ -83,30 +83,14 @@ let justLostIndex = -1;
 function animateWrongGuess(prevWrong) {
   justLostIndex = prevWrong;
 
-  // Scene jolt on every wrong guess
-  const scene = document.getElementById('mango-scene');
-  scene.classList.remove('jolt');
-  void scene.offsetWidth;
-  scene.classList.add('jolt');
-  scene.addEventListener('animationend', () => scene.classList.remove('jolt'), { once: true });
-
-  // Branch shake only on first wrong guess
-  if (prevWrong === 0) {
-    const bark = document.querySelector('.branch-bark');
-    bark.classList.remove('shake');
-    void bark.offsetWidth;
-    bark.classList.add('shake');
-  }
-
-  // Squash-and-stretch bounce when mango hits the ground (state 4)
-  if (state.wrongCount === 4) {
-    setTimeout(() => {
-      const fruit = document.querySelector('.mango-fruit');
-      if (!fruit) return;
-      fruit.classList.remove('mango-bounce');
-      void fruit.offsetWidth;
-      fruit.classList.add('mango-bounce');
-    }, 480); // fires after the fall transition completes (~0.5s)
+  // Tree wobble — intensity ramps up with each wrong guess (1–5; state 6 is CSS-only fall)
+  if (state.wrongCount < MAX_WRONG) {
+    const tree = document.querySelector('.tree-wrap');
+    // Strip any existing wobble class then force reflow so animation restarts
+    tree.className = 'tree-wrap';
+    void tree.offsetWidth;
+    tree.classList.add(`wobble-${state.wrongCount}`);
+    tree.addEventListener('animationend', () => tree.classList.remove(`wobble-${state.wrongCount}`), { once: true });
   }
 }
 
