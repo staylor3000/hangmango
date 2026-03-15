@@ -8,15 +8,15 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
 
-  <title>Hangmango — Free Word Guessing Game Online | Hangman Alternative</title>
-  <meta name="description" content="Hangmango is a free, child-friendly word guessing game — the fun hangman alternative. Guess letters to reveal the hidden word before the mango drops! No login needed." />
+  <title>hangmango — Free Word Guessing Game Online | Hangman Alternative</title>
+  <meta name="description" content="hangmango is a free, child-friendly word guessing game — the fun hangman alternative. Guess letters to reveal the hidden word before the mango drops! No login needed." />
   <link rel="canonical" href="https://hangmango.net/" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "GameApplication",
-    "name": "Hangmango",
+    "name": "hangmango",
     "description": "A free, child-friendly word guessing game — the fun modern hangman alternative. Guess letters to reveal the hidden word before the mango drops!",
     "url": "https://hangmango.net",
     "genre": "Word Game",
@@ -31,18 +31,18 @@
   }
   </script>
 
-  <meta property="og:title" content="Hangmango — Can you guess the word? 🥭" />
+  <meta property="og:title" content="hangmango — Can you guess the word? 🥭" />
   <meta property="og:description" content="Free word guessing game. Pick a category, guess letters, save the mango! No login, no download." />
   <meta property="og:url" content="https://hangmango.net" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Hangmango — Can you guess the word? 🥭" />
+  <meta name="twitter:title" content="hangmango — Can you guess the word? 🥭" />
   <meta name="twitter:description" content="Free word guessing game. Pick a category, guess letters, save the mango!" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" />
-  <link rel="stylesheet" href="style.css?v=001" />
+  <link rel="stylesheet" href="style.css?v=006" />
 </head>
 <body>
 
@@ -54,7 +54,7 @@
 
       <div class="setup-logo">
         <span class="logo-mango">🥭</span>
-        <h1>Hang<span>mango</span></h1>
+        <h1>hang<span>mango</span></h1>
       </div>
       <p class="tagline">Guess the word before the mango drops!</p>
 
@@ -107,28 +107,36 @@
   <!-- ══ GAME SCREEN ═══════════════════════════════════════════════════ -->
   <div id="game-screen" class="hidden">
 
-    <div id="game-layout">
+    <div class="game-card">
 
-      <!-- Left/top panel: mango scene -->
-      <div id="mango-panel">
-        <div id="wrong-dots" aria-label="Wrong guesses remaining"></div>
-        <div id="mango-scene" data-state="0">
-          <div class="branch-wrap">
-            <div class="branch-bark"></div>
-            <div class="branch-leaves">🌿</div>
-          </div>
-          <div class="hang-string"></div>
-          <div class="mango-fruit">🥭</div>
-          <div class="ground-line"></div>
-          <div class="splat-emoji">💦</div>
-        </div>
+      <div id="game-card-header">
+        <button id="menu-btn" class="btn-menu">← Menu</button>
+        <div id="category-hint"></div>
       </div>
 
-      <!-- Right/bottom panel: word + keyboard -->
-      <div id="word-panel">
-        <div id="category-hint"></div>
-        <div id="word-display" aria-label="Word to guess" aria-live="polite"></div>
-        <div id="keyboard" role="group" aria-label="Letter keyboard"></div>
+      <div id="game-layout">
+
+        <!-- Left/top panel: mango scene -->
+        <div id="mango-panel">
+          <div id="wrong-dots" aria-label="Wrong guesses remaining"></div>
+          <div id="mango-scene" data-state="0">
+            <div class="branch-wrap">
+              <div class="branch-bark"></div>
+              <div class="branch-leaves">🌿</div>
+            </div>
+            <div class="hang-string"></div>
+            <div class="mango-fruit">🥭</div>
+            <div class="ground-line"></div>
+            <div class="splat-emoji">💦</div>
+          </div>
+        </div>
+
+        <!-- Right/bottom panel: word + keyboard -->
+        <div id="word-panel">
+          <div id="word-display" aria-label="Word to guess" aria-live="polite"></div>
+          <div id="keyboard" role="group" aria-label="Letter keyboard"></div>
+        </div>
+
       </div>
 
     </div>
@@ -159,16 +167,16 @@
 
   <!-- ══ HOW TO PLAY (SEO) ════════════════════════════════════════════ -->
   <section id="how-to-play" aria-hidden="true">
-    <h2>How to Play Hangmango — Free Hangman Alternative</h2>
-    <p>Hangmango is a free online word guessing game — a modern, child-friendly alternative to the classic hangman game. Guess hidden words one letter at a time across six fun categories: Animals, Food, Sports, Countries, Movies, and Science.</p>
+    <h2>How to Play hangmango — Free Hangman Alternative</h2>
+    <p>hangmango is a free online word guessing game — a modern, child-friendly alternative to the classic hangman game. Guess hidden words one letter at a time across six fun categories: Animals, Food, Sports, Countries, Movies, and Science.</p>
     <h3>Game rules</h3>
     <p>A random word is chosen from your selected category and difficulty. The word appears as a row of blank tiles. Click a letter on the keyboard (or press a key) to guess. Correct guesses reveal the letter in the word. Wrong guesses advance the mango animation — the branch shakes, the mango loosens, falls, bounces, and finally goes splat! You get 6 wrong guesses before the mango drops.</p>
     <h3>Custom word mode</h3>
     <p>Type your own word in the "give a friend a word to guess" box. Pass the device to another player and let them guess your word — great for parties or classrooms.</p>
     <h3>Tips</h3>
     <p>Start with common vowels like E, A, and O. Then try frequent consonants like S, T, R, and N. Use the category hint to guide your guesses — an animal word with lots of letters is probably something exotic!</p>
-    <h3>About Hangmango</h3>
-    <p>Hangmango is completely free to play with no login or download required. It works on mobile, tablet, and desktop. Made by Silly Games Lab — the home of quick, fun browser games.</p>
+    <h3>About hangmango</h3>
+    <p>hangmango is completely free to play with no login or download required. It works on mobile, tablet, and desktop. Made by Silly Games Lab — the home of quick, fun browser games.</p>
   </section>
 
 </div><!-- #app -->

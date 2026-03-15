@@ -1,10 +1,10 @@
-/* Hangmango — styles v=001 */
+/* hangmango — styles v=006 */
 
 /* ── Variables ─────────────────────────────────────────────────────── */
 :root {
   --cream:   #FFF8F0;
-  --coral:   #FF6B8A;
-  --mint:    #7DD4C0;
+  --mango:   #FF8C2A;
+  --mint:    #03B863;
   --purple:  #6B35A3;
   --yellow:  #FFD166;
   --charcoal:#2D2D2D;
@@ -73,7 +73,7 @@ body {
   line-height: 1;
 }
 
-.setup-logo h1 span { color: var(--coral); }
+.setup-logo h1 span { color: var(--mango); }
 
 .tagline {
   text-align: center;
@@ -113,12 +113,12 @@ body {
   transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
 }
 
-.cat-btn:hover { background: #ffe8ef; border-color: var(--coral); }
+.cat-btn:hover { background: #fff0e0; border-color: var(--mango); }
 
 .cat-btn.active {
-  background: var(--coral);
+  background: var(--mango);
   color: var(--white);
-  border-color: var(--coral);
+  border-color: var(--mango);
 }
 
 /* Difficulty row */
@@ -151,17 +151,17 @@ body {
   font-family: var(--font-head);
   font-size: 1.2rem;
   padding: 14px 28px;
-  background: var(--coral);
+  background: var(--mango);
   color: var(--white);
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: transform 0.12s, box-shadow 0.12s;
-  box-shadow: 0 4px 14px rgba(255,107,138,0.35);
+  box-shadow: 0 4px 14px rgba(255,140,42,0.35);
   width: 100%;
 }
 
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,138,0.45); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,140,42,0.45); }
 .btn-primary:active { transform: translateY(0); }
 
 .btn-secondary {
@@ -220,7 +220,7 @@ body {
 
 .error-text {
   font-size: 0.82rem;
-  color: var(--coral);
+  color: var(--mango);
   font-weight: 700;
   min-height: 18px;
 }
@@ -270,18 +270,51 @@ body {
 #game-screen {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 40px;
 }
 
+.game-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 24px 28px;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#game-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btn-menu {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 7px 16px;
+  background: var(--mango);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-menu:hover { opacity: 0.85; }
+
 #game-layout {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 16px 24px;
   gap: 20px;
-  max-width: 680px;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -379,7 +412,7 @@ body {
   bottom: 8px;
   left: 0; right: 0;
   height: 6px;
-  background: linear-gradient(90deg, var(--mint), #5bc4b0);
+  background: linear-gradient(90deg, var(--mint), #02a357);
   border-radius: 3px;
 }
 
@@ -486,7 +519,7 @@ body {
   background: rgba(107,53,163,0.1);
   padding: 5px 14px;
   border-radius: 50px;
-  min-height: 28px;
+  white-space: nowrap;
 }
 
 /* Word display — letter tiles */
@@ -519,8 +552,8 @@ body {
 }
 
 .letter-tile.missed {
-  color: var(--coral);
-  border-color: var(--coral);
+  color: var(--mango);
+  border-color: var(--mango);
 }
 
 .word-space { width: 20px; }
@@ -542,14 +575,16 @@ body {
 .kb-row {
   display: flex;
   gap: 4px;
-  justify-content: center;
+  width: 100%;
+  max-width: 380px;
 }
 
 .key {
   font-family: var(--font-body);
   font-weight: 800;
   font-size: 0.85rem;
-  width: 34px;
+  flex: 1;
+  min-width: 0;
   height: 40px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
@@ -622,7 +657,7 @@ body {
   text-align: center;
 }
 
-#modal-header.won-header { background: linear-gradient(135deg, var(--coral), var(--yellow)); }
+#modal-header.won-header { background: linear-gradient(135deg, var(--mango), var(--yellow)); }
 #modal-header.lost-header { background: linear-gradient(135deg, var(--purple), #9B5FD3); }
 
 #modal-title {
@@ -687,36 +722,17 @@ footer a:hover { color: var(--purple); }
 #how-to-play h2 { font-size: 0.85rem; margin-bottom: 6px; font-family: var(--font-head); }
 #how-to-play h3 { font-size: 0.78rem; margin: 10px 0 4px; font-weight: 700; }
 
-/* ── Desktop layout ≥ 620px ─────────────────────────────────────────── */
-@media (min-width: 620px) {
-  #game-layout {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 32px 24px;
-    gap: 40px;
+/* ── Desktop: slightly larger keys on wide screens ───────────────────── */
+@media (min-width: 560px) {
+  .game-card {
+    max-width: 480px;
   }
 
-  #mango-panel {
-    flex-shrink: 0;
+  .kb-row {
+    max-width: 420px;
   }
-
-  #mango-scene {
-    width: 200px;
-    height: 240px;
-  }
-
-  #word-panel {
-    padding-top: 8px;
-    align-items: flex-start;
-  }
-
-  #word-display { justify-content: flex-start; }
-
-  #keyboard { align-items: flex-start; }
 
   .key {
-    width: 38px;
     height: 44px;
     font-size: 0.9rem;
   }

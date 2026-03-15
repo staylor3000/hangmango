@@ -207,7 +207,7 @@ function goToSetup() {
 // ── Confetti ───────────────────────────────────────────────────────────
 function launchConfetti() {
   const colors = [
-    getComputedStyle(document.documentElement).getPropertyValue('--coral').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--mango').trim(),
     getComputedStyle(document.documentElement).getPropertyValue('--mint').trim(),
     getComputedStyle(document.documentElement).getPropertyValue('--purple').trim(),
     getComputedStyle(document.documentElement).getPropertyValue('--yellow').trim(),
@@ -285,6 +285,9 @@ function initSetup() {
     startGame(pendingCustomWord, 'custom', 'custom');
     pendingCustomWord = '';
   });
+
+  // Menu button on game screen
+  document.getElementById('menu-btn').addEventListener('click', goToSetup);
 
   // Modal buttons
   document.getElementById('modal-play-again').addEventListener('click', playAgainSameSettings);
