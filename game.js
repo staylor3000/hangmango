@@ -49,7 +49,7 @@ function guessLetter(letter) {
   if (!state.word.includes(letter)) {
     const prevWrong = state.wrongCount;
     state.wrongCount++;
-    animateBranchShake(prevWrong);
+    animateWrongGuess(prevWrong);
     if (state.wrongCount >= MAX_WRONG) state.status = 'lost';
   } else {
     const allRevealed = [...state.word].every(c => state.guessed.has(c) || c === ' ');
@@ -66,7 +66,7 @@ function guessLetter(letter) {
 // ── Render all game UI ─────────────────────────────────────────────────
 function render() {
   renderMango();
-  renderWrongDots();
+  renderLives();
   renderWord();
   updateKeyboard();
 }
@@ -77,27 +77,72 @@ function renderMango() {
   scene.dataset.state = state.wrongCount;
 }
 
-function animateBranchShake(prevWrong) {
-  // Only shake on the first wrong guess; from guess 2+ the branch stays bent
+// tracks which slot index just got lost (set before render, cleared after)
+let justLostIndex = -1;
+
+function animateWrongGuess(prevWrong) {
+  justLostIndex = prevWrong;
+
+  // Scene jolt on every wrong guess
+  const scene = document.getElementById('mango-scene');
+  scene.classList.remove('jolt');
+  void scene.offsetWidth;
+  scene.classList.add('jolt');
+  scene.addEventListener('animationend', () => scene.classList.remove('jolt'), { once: true });
+
+  // Branch shake only on first wrong guess
   if (prevWrong === 0) {
     const bark = document.querySelector('.branch-bark');
     bark.classList.remove('shake');
-    void bark.offsetWidth; // force reflow to restart animation
+    void bark.offsetWidth;
     bark.classList.add('shake');
+  }
+
+  // Squash-and-stretch bounce when mango hits the ground (state 4)
+  if (state.wrongCount === 4) {
+    setTimeout(() => {
+      const fruit = document.querySelector('.mango-fruit');
+      if (!fruit) return;
+      fruit.classList.remove('mango-bounce');
+      void fruit.offsetWidth;
+      fruit.classList.add('mango-bounce');
+    }, 480); // fires after the fall transition completes (~0.5s)
   }
 }
 
-// ── Wrong dots ─────────────────────────────────────────────────────────
-function renderWrongDots() {
-  const container = document.getElementById('wrong-dots');
-  container.innerHTML = '';
+// ── Lives strip ────────────────────────────────────────────────────────
+function renderLives() {
+  const slotsEl = document.getElementById('life-slots');
+  const label   = document.getElementById('lives-label');
+  const remaining = MAX_WRONG - state.wrongCount;
+
+  slotsEl.innerHTML = '';
   for (let i = 0; i < MAX_WRONG; i++) {
-    const dot = document.createElement('span');
-    dot.className = i < state.wrongCount ? 'try-dot used' : 'try-dot';
-    dot.textContent = i < state.wrongCount ? '❌' : '🥭';
-    container.appendChild(dot);
+    const slot = document.createElement('div');
+    const isUsed     = i < state.wrongCount;
+    const isJustLost = i === justLostIndex;
+    slot.className = 'life-slot' + (isUsed ? ' used' : '') + (isJustLost ? ' just-lost' : '');
+    slot.textContent = isUsed ? '' : '🥭';
+    slotsEl.appendChild(slot);
   }
-  container.setAttribute('aria-label', `${state.wrongCount} of ${MAX_WRONG} wrong guesses`);
+  justLostIndex = -1; // consumed
+  slotsEl.setAttribute('aria-label', `${state.wrongCount} of ${MAX_WRONG} wrong guesses`);
+
+  label.className = '';
+  if (remaining <= 0) {
+    label.textContent = '';
+  } else if (remaining === 1) {
+    label.textContent = 'Last chance!';
+    label.classList.add('warn-danger');
+  } else if (remaining === 2) {
+    label.textContent = `${remaining} left`;
+    label.classList.add('warn-high');
+  } else if (remaining <= 3) {
+    label.textContent = `${remaining} left`;
+    label.classList.add('warn-mid');
+  } else {
+    label.textContent = `${remaining} left`;
+  }
 }
 
 // ── Word display ───────────────────────────────────────────────────────
