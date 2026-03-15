@@ -1,4 +1,4 @@
-/* Hangmango — styles v=002 */
+/* Hangmango — styles v=003 */
 
 /* ── Variables ─────────────────────────────────────────────────────── */
 :root {
@@ -270,37 +270,51 @@ body {
 #game-screen {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 40px;
 }
 
-#game-topbar {
-  padding: 12px 16px 0;
+.game-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 24px 28px;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#game-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .btn-menu {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   padding: 7px 16px;
-  background: var(--white);
+  background: var(--cream);
   color: var(--charcoal);
-  border: 2px solid #e0e0e0;
+  border: 2px solid transparent;
   border-radius: 50px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
 }
 
-.btn-menu:hover { border-color: var(--purple); color: var(--purple); }
+.btn-menu:hover { background: #ffe8ef; color: var(--coral); }
 
 #game-layout {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 16px 24px;
   gap: 20px;
-  max-width: 680px;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -505,7 +519,7 @@ body {
   background: rgba(107,53,163,0.1);
   padding: 5px 14px;
   border-radius: 50px;
-  min-height: 28px;
+  white-space: nowrap;
 }
 
 /* Word display — letter tiles */
@@ -706,14 +720,16 @@ footer a:hover { color: var(--purple); }
 #how-to-play h2 { font-size: 0.85rem; margin-bottom: 6px; font-family: var(--font-head); }
 #how-to-play h3 { font-size: 0.78rem; margin: 10px 0 4px; font-weight: 700; }
 
-/* ── Desktop layout ≥ 620px ─────────────────────────────────────────── */
-@media (min-width: 620px) {
+/* ── Desktop layout ≥ 560px ─────────────────────────────────────────── */
+@media (min-width: 560px) {
+  .game-card {
+    max-width: 580px;
+  }
+
   #game-layout {
     flex-direction: row;
     align-items: flex-start;
-    justify-content: center;
-    padding: 32px 24px;
-    gap: 40px;
+    gap: 32px;
   }
 
   #mango-panel {

@@ -42,7 +42,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" />
-  <link rel="stylesheet" href="style.css?v=002" />
+  <link rel="stylesheet" href="style.css?v=003" />
 </head>
 <body>
 
@@ -107,32 +107,36 @@
   <!-- ══ GAME SCREEN ═══════════════════════════════════════════════════ -->
   <div id="game-screen" class="hidden">
 
-    <div id="game-topbar">
-      <button id="menu-btn" class="btn-menu">← Menu</button>
-    </div>
+    <div class="game-card">
 
-    <div id="game-layout">
-
-      <!-- Left/top panel: mango scene -->
-      <div id="mango-panel">
-        <div id="wrong-dots" aria-label="Wrong guesses remaining"></div>
-        <div id="mango-scene" data-state="0">
-          <div class="branch-wrap">
-            <div class="branch-bark"></div>
-            <div class="branch-leaves">🌿</div>
-          </div>
-          <div class="hang-string"></div>
-          <div class="mango-fruit">🥭</div>
-          <div class="ground-line"></div>
-          <div class="splat-emoji">💦</div>
-        </div>
+      <div id="game-card-header">
+        <button id="menu-btn" class="btn-menu">← Menu</button>
+        <div id="category-hint"></div>
       </div>
 
-      <!-- Right/bottom panel: word + keyboard -->
-      <div id="word-panel">
-        <div id="category-hint"></div>
-        <div id="word-display" aria-label="Word to guess" aria-live="polite"></div>
-        <div id="keyboard" role="group" aria-label="Letter keyboard"></div>
+      <div id="game-layout">
+
+        <!-- Left/top panel: mango scene -->
+        <div id="mango-panel">
+          <div id="wrong-dots" aria-label="Wrong guesses remaining"></div>
+          <div id="mango-scene" data-state="0">
+            <div class="branch-wrap">
+              <div class="branch-bark"></div>
+              <div class="branch-leaves">🌿</div>
+            </div>
+            <div class="hang-string"></div>
+            <div class="mango-fruit">🥭</div>
+            <div class="ground-line"></div>
+            <div class="splat-emoji">💦</div>
+          </div>
+        </div>
+
+        <!-- Right/bottom panel: word + keyboard -->
+        <div id="word-panel">
+          <div id="word-display" aria-label="Word to guess" aria-live="polite"></div>
+          <div id="keyboard" role="group" aria-label="Letter keyboard"></div>
+        </div>
+
       </div>
 
     </div>
