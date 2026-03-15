@@ -1,0 +1,723 @@
+/* Hangmango — styles v=001 */
+
+/* ── Variables ─────────────────────────────────────────────────────── */
+:root {
+  --cream:   #FFF8F0;
+  --coral:   #FF6B8A;
+  --mint:    #7DD4C0;
+  --purple:  #6B35A3;
+  --yellow:  #FFD166;
+  --charcoal:#2D2D2D;
+  --white:   #FFFFFF;
+  --shadow:  0 4px 24px rgba(0,0,0,0.10);
+  --radius:  18px;
+  --font-head: 'Fredoka One', cursive;
+  --font-body: 'Nunito', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--charcoal);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden { display: none !important; }
+
+/* ── Setup Screen ───────────────────────────────────────────────────── */
+#setup-screen {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 40px;
+}
+
+.setup-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.setup-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logo-mango { font-size: 2.8rem; font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif; }
+
+.setup-logo h1 {
+  font-family: var(--font-head);
+  font-size: 2.6rem;
+  color: var(--charcoal);
+  line-height: 1;
+}
+
+.setup-logo h1 span { color: var(--coral); }
+
+.tagline {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--purple);
+}
+
+.setup-section { display: flex; flex-direction: column; gap: 10px; }
+
+.setup-label {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  color: var(--charcoal);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Category grid */
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.cat-btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 10px 6px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.cat-btn:hover { background: #ffe8ef; border-color: var(--coral); }
+
+.cat-btn.active {
+  background: var(--coral);
+  color: var(--white);
+  border-color: var(--coral);
+}
+
+/* Difficulty row */
+.diff-row { display: flex; gap: 8px; }
+
+.diff-btn {
+  flex: 1;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 10px 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.diff-btn:hover { border-color: var(--mint); }
+
+.diff-btn.active {
+  background: var(--purple);
+  color: var(--white);
+  border-color: var(--purple);
+}
+
+/* Primary / Secondary buttons */
+.btn-primary {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  padding: 14px 28px;
+  background: var(--coral);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s;
+  box-shadow: 0 4px 14px rgba(255,107,138,0.35);
+  width: 100%;
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,138,0.45); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--purple);
+  border: 2px solid var(--purple);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-secondary:hover { background: var(--purple); color: var(--white); }
+
+/* Custom word section */
+.custom-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #aaa;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.custom-divider::before,
+.custom-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+.custom-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+#custom-word-input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--charcoal);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#custom-word-input:focus { border-color: var(--mint); }
+
+.error-text {
+  font-size: 0.82rem;
+  color: var(--coral);
+  font-weight: 700;
+  min-height: 18px;
+}
+
+/* ── Pass Screen ────────────────────────────────────────────────────── */
+#pass-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.pass-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 48px 32px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.pass-icon {
+  font-size: 4rem;
+  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+}
+
+.pass-card h2 {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: var(--purple);
+}
+
+.pass-card p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ── Game Screen ────────────────────────────────────────────────────── */
+#game-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#game-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 24px;
+  gap: 20px;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Mango panel ───────────────────────────── */
+#mango-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Wrong dots */
+#wrong-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.try-dot {
+  font-size: 1.3rem;
+  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  transition: transform 0.2s;
+}
+
+.try-dot.used {
+  font-size: 1.0rem;
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+/* ── Mango Scene ──────────────────────────── */
+#mango-scene {
+  position: relative;
+  width: 180px;
+  height: 220px;
+  user-select: none;
+}
+
+/* Branch */
+.branch-wrap {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  right: 10px;
+}
+
+.branch-bark {
+  height: 16px;
+  background: linear-gradient(180deg, #8B6340 0%, #6B4A2A 100%);
+  border-radius: 8px;
+  transform-origin: left center;
+}
+
+.branch-leaves {
+  position: absolute;
+  top: -20px;
+  left: 12px;
+  font-size: 1.5rem;
+  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  pointer-events: none;
+}
+
+/* String */
+.hang-string {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  width: 3px;
+  height: 46px;
+  background: #6B4A2A;
+  transform: translateX(-50%);
+  transform-origin: top center;
+  transition: height 0.5s ease, opacity 0.5s ease, transform 0.4s ease;
+  border-radius: 2px;
+}
+
+/* Mango */
+.mango-fruit {
+  position: absolute;
+  top: 68px;
+  left: 50%;
+  font-size: 3.4rem;
+  line-height: 1;
+  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  transform: translateX(-50%);
+  transform-origin: top center;
+  transition: top 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
+              transform 0.4s ease,
+              opacity 0.3s ease;
+}
+
+/* Ground */
+.ground-line {
+  position: absolute;
+  bottom: 8px;
+  left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--mint), #5bc4b0);
+  border-radius: 3px;
+}
+
+/* Splat */
+.splat-emoji {
+  display: none;
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  font-size: 2.8rem;
+  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── Mango state transitions ──────────────── */
+
+/* State 1: branch shakes (class-triggered animation) */
+.branch-bark.shake {
+  animation: branchShake 0.55s ease;
+}
+
+/* State 2: mango tilts / loosens */
+[data-state="2"] .mango-fruit {
+  transform: translateX(-50%) rotate(18deg);
+}
+[data-state="2"] .hang-string {
+  transform: translateX(-50%) skewX(8deg);
+}
+
+/* State 3: mango dropping, string stretches then snaps */
+[data-state="3"] .mango-fruit {
+  top: 105px;
+  transform: translateX(-50%) rotate(35deg);
+}
+[data-state="3"] .hang-string {
+  height: 70px;
+}
+
+/* State 4: mango hits ground */
+[data-state="4"] .mango-fruit {
+  top: 152px;
+  transform: translateX(-50%) rotate(60deg);
+}
+[data-state="4"] .hang-string {
+  height: 0;
+  opacity: 0;
+}
+
+/* State 5: mango squished */
+[data-state="5"] .mango-fruit {
+  top: 162px;
+  transform: translateX(calc(-50% - 8px)) rotate(80deg) scaleX(1.35) scaleY(0.65);
+}
+[data-state="5"] .hang-string { height: 0; opacity: 0; }
+
+/* State 6: full splat! */
+[data-state="6"] .mango-fruit {
+  opacity: 0;
+}
+[data-state="6"] .hang-string { height: 0; opacity: 0; }
+[data-state="6"] .splat-emoji {
+  display: block;
+  transform: translateX(-50%) scale(1);
+  animation: splatIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+/* ── Keyframes ────────────────────────────── */
+@keyframes branchShake {
+  0%,100% { transform: rotate(0deg); }
+  15% { transform: rotate(-5deg); }
+  35% { transform: rotate(4deg); }
+  55% { transform: rotate(-3deg); }
+  75% { transform: rotate(2deg); }
+}
+
+@keyframes splatIn {
+  0%   { transform: translateX(-50%) scale(0); opacity: 0; }
+  60%  { transform: translateX(-50%) scale(1.3); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) scaleY(1); }
+  40%     { transform: translateX(-50%) scaleY(0.7) scaleX(1.25); }
+  70%     { transform: translateX(-50%) scaleY(1.1) scaleX(0.95); }
+}
+
+/* ── Word Panel ──────────────────────────────────────────────────────── */
+#word-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Category hint badge */
+#category-hint {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--purple);
+  background: rgba(107,53,163,0.1);
+  padding: 5px 14px;
+  border-radius: 50px;
+  min-height: 28px;
+}
+
+/* Word display — letter tiles */
+#word-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.letter-tile {
+  width: 36px;
+  height: 42px;
+  border-bottom: 3px solid var(--charcoal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 4px;
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  color: var(--charcoal);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.letter-tile.revealed {
+  color: var(--purple);
+  border-color: var(--purple);
+  animation: popIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.letter-tile.missed {
+  color: var(--coral);
+  border-color: var(--coral);
+}
+
+.word-space { width: 20px; }
+
+@keyframes popIn {
+  0%   { transform: scale(0.6); }
+  100% { transform: scale(1); }
+}
+
+/* ── Keyboard ────────────────────────────────────────────────────────── */
+#keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  width: 100%;
+}
+
+.kb-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.key {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.85rem;
+  width: 34px;
+  height: 40px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.08s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:hover:not(:disabled) {
+  background: var(--cream);
+  border-color: var(--purple);
+  transform: translateY(-1px);
+}
+
+.key:active:not(:disabled) { transform: translateY(0); }
+
+.key:disabled { cursor: default; }
+
+.key.key-correct {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: var(--white);
+}
+
+.key.key-wrong {
+  background: #eee;
+  border-color: #ccc;
+  color: #aaa;
+}
+
+/* ── Result Modal ────────────────────────────────────────────────────── */
+#result-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+}
+
+.modal-card {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  width: 100%;
+  max-width: 380px;
+  overflow: hidden;
+  animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+#modal-header {
+  padding: 24px 24px 20px;
+  text-align: center;
+}
+
+#modal-header.won-header { background: linear-gradient(135deg, var(--coral), var(--yellow)); }
+#modal-header.lost-header { background: linear-gradient(135deg, var(--purple), #9B5FD3); }
+
+#modal-title {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+}
+
+#modal-word-reveal {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  color: var(--charcoal);
+}
+
+/* ── Confetti ────────────────────────────────────────────────────────── */
+.confetti-piece {
+  position: fixed;
+  top: -20px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+  z-index: 200;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 0.82rem;
+  color: #999;
+}
+
+footer a { color: #999; text-decoration: none; }
+footer a:hover { color: var(--purple); }
+
+/* ── How to Play (SEO) ───────────────────────────────────────────────── */
+#how-to-play {
+  padding: 0 16px 32px;
+  max-width: 680px;
+  margin: 0 auto;
+  opacity: 0.35;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--charcoal);
+}
+
+#how-to-play h2 { font-size: 0.85rem; margin-bottom: 6px; font-family: var(--font-head); }
+#how-to-play h3 { font-size: 0.78rem; margin: 10px 0 4px; font-weight: 700; }
+
+/* ── Desktop layout ≥ 620px ─────────────────────────────────────────── */
+@media (min-width: 620px) {
+  #game-layout {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 24px;
+    gap: 40px;
+  }
+
+  #mango-panel {
+    flex-shrink: 0;
+  }
+
+  #mango-scene {
+    width: 200px;
+    height: 240px;
+  }
+
+  #word-panel {
+    padding-top: 8px;
+    align-items: flex-start;
+  }
+
+  #word-display { justify-content: flex-start; }
+
+  #keyboard { align-items: flex-start; }
+
+  .key {
+    width: 38px;
+    height: 44px;
+    font-size: 0.9rem;
+  }
+}
