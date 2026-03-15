@@ -238,7 +238,7 @@ function launchConfetti() {
   const colors = [
     getComputedStyle(document.documentElement).getPropertyValue('--mango').trim(),
     getComputedStyle(document.documentElement).getPropertyValue('--mint').trim(),
-    getComputedStyle(document.documentElement).getPropertyValue('--purple').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--red').trim(),
     getComputedStyle(document.documentElement).getPropertyValue('--yellow').trim(),
   ];
 
