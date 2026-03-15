@@ -1,10 +1,10 @@
-/* Hangmango — styles v=004 */
+/* Hangmango — styles v=005 */
 
 /* ── Variables ─────────────────────────────────────────────────────── */
 :root {
   --cream:   #FFF8F0;
   --mango:   #FF8C2A;
-  --mint:    #7DD4C0;
+  --mint:    #03B863;
   --purple:  #6B35A3;
   --yellow:  #FFD166;
   --charcoal:#2D2D2D;
@@ -299,16 +299,16 @@ body {
   font-weight: 700;
   font-size: 0.875rem;
   padding: 7px 16px;
-  background: var(--cream);
-  color: var(--charcoal);
-  border: 2px solid transparent;
+  background: var(--mango);
+  color: var(--white);
+  border: none;
   border-radius: 50px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: opacity 0.15s;
   flex-shrink: 0;
 }
 
-.btn-menu:hover { background: #fff0e0; color: var(--mango); }
+.btn-menu:hover { opacity: 0.85; }
 
 #game-layout {
   display: flex;
@@ -412,7 +412,7 @@ body {
   bottom: 8px;
   left: 0; right: 0;
   height: 6px;
-  background: linear-gradient(90deg, var(--mint), #5bc4b0);
+  background: linear-gradient(90deg, var(--mint), #02a357);
   border-radius: 3px;
 }
 
