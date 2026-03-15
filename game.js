@@ -286,6 +286,9 @@ function initSetup() {
     pendingCustomWord = '';
   });
 
+  // Menu button on game screen
+  document.getElementById('menu-btn').addEventListener('click', goToSetup);
+
   // Modal buttons
   document.getElementById('modal-play-again').addEventListener('click', playAgainSameSettings);
   document.getElementById('modal-new-game').addEventListener('click', goToSetup);

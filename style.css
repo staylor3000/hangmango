@@ -1,4 +1,4 @@
-/* Hangmango — styles v=001 */
+/* Hangmango — styles v=002 */
 
 /* ── Variables ─────────────────────────────────────────────────────── */
 :root {
@@ -272,6 +272,25 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+#game-topbar {
+  padding: 12px 16px 0;
+}
+
+.btn-menu {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 7px 16px;
+  background: var(--white);
+  color: var(--charcoal);
+  border: 2px solid #e0e0e0;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btn-menu:hover { border-color: var(--purple); color: var(--purple); }
 
 #game-layout {
   flex: 1;
