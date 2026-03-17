@@ -9,6 +9,27 @@ const KB_ROWS = [
 
 const MAX_WRONG = 6;
 
+// ── Stopwatch timer ─────────────────────────────────────────────────────
+let timerInterval = null;
+let timerSeconds  = 0;
+let timerStarted  = false;
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerSeconds  = 0;
+  timerStarted  = false;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const el = document.getElementById('timer-display');
+  if (!el) return;
+  const m = Math.floor(timerSeconds / 60);
+  const s = timerSeconds % 60;
+  el.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+}
+
 // ── Game state ─────────────────────────────────────────────────────────
 let state = {
   word: '',
@@ -33,6 +54,7 @@ function startGame(word, category, difficulty) {
     wrongCount: 0,
     status: 'playing'
   };
+  startTimer();
   buildKeyboard();
   render();
 }
@@ -46,6 +68,12 @@ function guessLetter(letter) {
 
   state.guessed.add(letter);
 
+  // Start stopwatch on first guess
+  if (!timerStarted) {
+    timerStarted = true;
+    timerInterval = setInterval(() => { timerSeconds++; updateTimerDisplay(); }, 1000);
+  }
+
   if (!state.word.includes(letter)) {
     const prevWrong = state.wrongCount;
     state.wrongCount++;
@@ -53,28 +81,72 @@ function guessLetter(letter) {
     if (state.wrongCount >= MAX_WRONG) state.status = 'lost';
   } else {
     const allRevealed = [...state.word].every(c => state.guessed.has(c) || c === ' ');
-    if (allRevealed) state.status = 'won';
+    if (allRevealed) {
+      state.status = 'won';
+      animatePanelChange('win', true);
+    }
   }
 
   render();
 
   if (state.status === 'won' || state.status === 'lost') {
+    clearInterval(timerInterval);
+    timerInterval = null;
     setTimeout(() => showResultModal(state.status === 'won'), 700);
   }
 }
 
 // ── Render all game UI ─────────────────────────────────────────────────
 function render() {
-  renderMango();
+  renderPanel();
   renderLives();
   renderWord();
   updateKeyboard();
 }
 
-// ── Mango scene ────────────────────────────────────────────────────────
-function renderMango() {
-  const scene = document.getElementById('mango-scene');
-  scene.dataset.state = state.wrongCount;
+// ── Comic panel system ─────────────────────────────────────────────────
+let panelTransitioning = false;
+
+function renderPanel() {
+  if (panelTransitioning) return;
+  const img = document.getElementById('panel-img');
+  const container = document.getElementById('panel-container');
+  const isWin = state.status === 'won';
+  img.src = isWin ? 'assets/panel-win.jpeg' : `assets/panel-${state.wrongCount}.jpeg`;
+  img.classList.toggle('panel-win-glow', isWin);
+  container.classList.remove('panel-shake');
+}
+
+function animatePanelChange(panelKey, isWin) {
+  const flash = document.getElementById('panel-flash');
+  const img = document.getElementById('panel-img');
+  const container = document.getElementById('panel-container');
+  const newSrc = isWin ? 'assets/panel-win.jpeg' : `assets/panel-${panelKey}.jpeg`;
+
+  if (panelTransitioning) {
+    // Already mid-flash — just update the target image directly
+    img.src = newSrc;
+    img.classList.toggle('panel-win-glow', isWin);
+    return;
+  }
+
+  panelTransitioning = true;
+  flash.classList.add('flashing');
+
+  setTimeout(() => {
+    img.src = newSrc;
+    img.classList.toggle('panel-win-glow', isWin);
+  }, 75);
+
+  setTimeout(() => {
+    flash.classList.remove('flashing');
+    panelTransitioning = false;
+    if (!isWin) {
+      void container.offsetWidth;
+      container.classList.add('panel-shake');
+      container.addEventListener('animationend', () => container.classList.remove('panel-shake'), { once: true });
+    }
+  }, 150);
 }
 
 // tracks which slot index just got lost (set before render, cleared after)
@@ -82,16 +154,7 @@ let justLostIndex = -1;
 
 function animateWrongGuess(prevWrong) {
   justLostIndex = prevWrong;
-
-  // Tree wobble — intensity ramps up with each wrong guess (1–5; state 6 is CSS-only fall)
-  if (state.wrongCount < MAX_WRONG) {
-    const tree = document.querySelector('.tree-wrap');
-    // Strip any existing wobble class then force reflow so animation restarts
-    tree.className = 'tree-wrap';
-    void tree.offsetWidth;
-    tree.classList.add(`wobble-${state.wrongCount}`);
-    tree.addEventListener('animationend', () => tree.classList.remove(`wobble-${state.wrongCount}`), { once: true });
-  }
+  animatePanelChange(state.wrongCount, false);
 }
 
 // ── Lives strip ────────────────────────────────────────────────────────
@@ -106,7 +169,7 @@ function renderLives() {
     const isUsed     = i < state.wrongCount;
     const isJustLost = i === justLostIndex;
     slot.className = 'life-slot' + (isUsed ? ' used' : '') + (isJustLost ? ' just-lost' : '');
-    slot.textContent = isUsed ? '' : '🥭';
+    slot.textContent = isUsed ? '✕' : '🥭';
     slotsEl.appendChild(slot);
   }
   justLostIndex = -1; // consumed
@@ -130,14 +193,26 @@ function renderLives() {
 }
 
 // ── Word display ───────────────────────────────────────────────────────
+function buildTile(char) {
+  const revealed = state.guessed.has(char);
+  const missed   = state.status === 'lost' && !revealed;
+  return `<span class="letter-tile${revealed ? ' revealed' : ''}${missed ? ' missed' : ''}">${revealed || state.status === 'lost' ? char : ''}</span>`;
+}
+
 function renderWord() {
   const display = document.getElementById('word-display');
-  display.innerHTML = [...state.word].map(char => {
-    if (char === ' ') return '<span class="word-space"></span>';
-    const revealed = state.guessed.has(char);
-    const missed   = state.status === 'lost' && !revealed;
-    return `<span class="letter-tile${revealed ? ' revealed' : ''}${missed ? ' missed' : ''}">${revealed || state.status === 'lost' ? char : ''}</span>`;
-  }).join('');
+  const isMultiWord = state.word.includes(' ');
+  display.classList.toggle('multi-word', isMultiWord);
+
+  if (isMultiWord) {
+    // Wrap each word in a nowrap group so tiles never break mid-word
+    display.innerHTML = state.word.split(' ')
+      .map(word => `<span class="word-group">${[...word].map(buildTile).join('')}</span>`)
+      .join('');
+  } else {
+    // Single word: tiles fill the line and shrink to fit
+    display.innerHTML = [...state.word].map(buildTile).join('');
+  }
 }
 
 // ── Keyboard ───────────────────────────────────────────────────────────
@@ -201,11 +276,55 @@ function showResultModal(won) {
   const title       = document.getElementById('modal-title');
   const wordReveal  = document.getElementById('modal-word-reveal');
   const playAgain   = document.getElementById('modal-play-again');
+  const panelEl     = document.getElementById('modal-panel');
+  const panelImg    = document.getElementById('modal-panel-img');
+  const statsEl     = document.getElementById('modal-stats');
+  const shareBtn    = document.getElementById('modal-share');
 
   header.className = won ? 'won-header' : 'lost-header';
   title.textContent = won ? '🥭 You got it!' : '💥 Splat!';
-  wordReveal.textContent = won ? '' : `The word was: ${state.word}`;
+  wordReveal.textContent = '';
   playAgain.textContent  = won ? 'Next word 🥭' : 'Try again 🔄';
+
+  const m = Math.floor(timerSeconds / 60);
+  const s = timerSeconds % 60;
+  const timeStr = `${m}:${s.toString().padStart(2, '0')}`;
+  const wrongLabel = state.wrongCount === 1 ? 'wrong guess' : 'wrong guesses';
+
+  // Panel image
+  panelEl.classList.remove('hidden');
+  panelImg.src = won ? 'assets/panel-win.jpeg' : 'assets/panel-6.jpeg';
+
+  // Stats
+  statsEl.classList.remove('hidden');
+  if (won) {
+    statsEl.innerHTML = `
+      <div>🥭 <strong>${state.word}</strong></div>
+      <div>${state.wrongCount} ${wrongLabel} &nbsp;·&nbsp; ⏱ ${timeStr}</div>
+    `;
+  } else {
+    statsEl.innerHTML = `
+      <div>💥 The word was <strong>${state.word}</strong></div>
+      <div>${state.wrongCount} ${wrongLabel} &nbsp;·&nbsp; ⏱ ${timeStr}</div>
+    `;
+  }
+
+  // Share button
+  shareBtn.classList.remove('hidden');
+  shareBtn.textContent = 'Share result 🥭';
+  shareBtn.onclick = () => {
+    const text = won
+      ? `🥭 hangmango\nI guessed "${state.word}" with ${state.wrongCount} ${wrongLabel} in ${timeStr}!\nPlay free at hangmango.net`
+      : `💥 hangmango\nI couldn't guess "${state.word}" — ${state.wrongCount} ${wrongLabel} in ${timeStr}!\nCan you do better? hangmango.net`;
+    if (navigator.share) {
+      navigator.share({ text, url: 'https://hangmango.net' }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(text).then(() => {
+        shareBtn.textContent = 'Copied! ✓';
+        setTimeout(() => { shareBtn.textContent = 'Share result 🥭'; }, 2000);
+      }).catch(() => {});
+    }
+  };
 
   modal.classList.remove('hidden');
   if (won) launchConfetti();
