@@ -7,7 +7,7 @@ const KB_ROWS = [
   ['Z','X','C','V','B','N','M']
 ];
 
-const MAX_WRONG = 6;
+const MAX_WRONG = 8;
 
 // ── Stopwatch timer ─────────────────────────────────────────────────────
 let timerInterval = null;
@@ -52,7 +52,9 @@ function startGame(word, category, difficulty) {
     difficulty,
     guessed: new Set(),
     wrongCount: 0,
-    status: 'playing'
+    status: 'playing',
+    winPanelIdx:  Math.floor(Math.random() * 3) + 1,
+    losePanelIdx: Math.floor(Math.random() * 3) + 1
   };
   startTimer();
   buildKeyboard();
@@ -112,7 +114,7 @@ function renderPanel() {
   const img = document.getElementById('panel-img');
   const container = document.getElementById('panel-container');
   const isWin = state.status === 'won';
-  img.src = isWin ? 'assets/panel-win.jpeg' : `assets/panel-${state.wrongCount}.jpeg`;
+  img.src = isWin ? `assets/panel-win-${state.winPanelIdx}.png` : `assets/panel-${state.wrongCount}.png`;
   img.classList.toggle('panel-win-glow', isWin);
   container.classList.remove('panel-shake');
 }
@@ -121,7 +123,7 @@ function animatePanelChange(panelKey, isWin) {
   const flash = document.getElementById('panel-flash');
   const img = document.getElementById('panel-img');
   const container = document.getElementById('panel-container');
-  const newSrc = isWin ? 'assets/panel-win.jpeg' : `assets/panel-${panelKey}.jpeg`;
+  const newSrc = isWin ? `assets/panel-win-${state.winPanelIdx}.png` : `assets/panel-${panelKey}.png`;
 
   if (panelTransitioning) {
     // Already mid-flash — just update the target image directly
@@ -281,8 +283,8 @@ function showResultModal(won) {
   const statsEl     = document.getElementById('modal-stats');
   const shareBtn    = document.getElementById('modal-share');
 
-  header.className = won ? 'won-header' : 'lost-header';
-  title.textContent = won ? '🥭 You got it!' : '💥 Splat!';
+  header.className = 'hidden';
+  title.textContent = '';
   wordReveal.textContent = '';
   playAgain.textContent  = won ? 'Next word 🥭' : 'Try again 🔄';
 
@@ -293,7 +295,7 @@ function showResultModal(won) {
 
   // Panel image
   panelEl.classList.remove('hidden');
-  panelImg.src = won ? 'assets/panel-win.jpeg' : 'assets/panel-6.jpeg';
+  panelImg.src = won ? `assets/panel-win-${state.winPanelIdx}.png` : `assets/panel-lose-${state.losePanelIdx}.png`;
 
   // Stats
   statsEl.classList.remove('hidden');
