@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥭</text></svg>" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <title>Hangmango — Jeu de Mots Gratuit en Ligne | Alternative au Pendu</title>
+  <meta name="description" content="Joue gratuitement à Hangmango — le jeu de devinettes de mots moderne et amusant. Sans téléchargement, sans inscription. Devine le mot avant que la mangue tombe !" />
+  <link rel="canonical" href="https://hangmango.net/fr/" />
+
+  <link rel="alternate" hreflang="en" href="https://hangmango.net/" />
+  <link rel="alternate" hreflang="es-419" href="https://hangmango.net/es/" />
+  <link rel="alternate" hreflang="fr" href="https://hangmango.net/fr/" />
+  <link rel="alternate" hreflang="x-default" href="https://hangmango.net/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GameApplication",
+    "name": "hangmango",
+    "description": "Un jeu de devinettes de mots gratuit — une alternative moderne et amusante au classique jeu du pendu. Devine les lettres pour révéler le mot caché avant que la mangue tombe !",
+    "url": "https://hangmango.net/fr/",
+    "inLanguage": "fr",
+    "genre": "Word Game",
+    "playMode": "SinglePlayer",
+    "applicationCategory": "Game",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+
+  <meta property="og:title" content="hangmango — Tu peux deviner le mot ? 🥭" />
+  <meta property="og:description" content="Jeu de mots gratuit. Choisis une catégorie, devine les lettres, sauve la mangue ! Sans inscription, sans téléchargement." />
+  <meta property="og:url" content="https://hangmango.net/fr/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="hangmango — Tu peux deviner le mot ? 🥭" />
+  <meta name="twitter:description" content="Jeu de mots gratuit. Choisis une catégorie, devine les lettres, sauve la mangue !" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1852825669034773"
+       crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="../style.css?v=014" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ══ LANGUAGE SWITCHER ═══════════════════════════════════════════════ -->
+  <div id="lang-switcher">
+    <a href="https://hangmango.net/" class="lang-btn">🇬🇧 EN</a>
+    <a href="https://hangmango.net/es/" class="lang-btn">🇲🇽 ES</a>
+    <a href="https://hangmango.net/fr/" class="lang-btn active">🇫🇷 FR</a>
+  </div>
+
+  <!-- ══ SETUP SCREEN ══════════════════════════════════════════════════ -->
+  <div id="setup-screen">
+    <div class="setup-card">
+
+      <div class="logo-panel">
+        <div class="setup-logo">
+          <span class="logo-mango">🥭</span>
+          <h1>hang<span>mango</span></h1>
+        </div>
+        <p class="tagline">Devine le mot avant que la mangue tombe !</p>
+      </div>
+
+      <div class="setup-content">
+
+        <div class="setup-section">
+          <h2 class="setup-label">Catégorie</h2>
+          <div class="cat-grid">
+            <button class="cat-btn active" data-category="animaux">🐾 Animaux</button>
+            <button class="cat-btn" data-category="nourriture">🍕 Nourriture</button>
+            <button class="cat-btn" data-category="sports">⚽ Sports</button>
+            <button class="cat-btn" data-category="pays">🌍 Pays</button>
+            <button class="cat-btn" data-category="sciences">🔬 Sciences</button>
+            <button class="cat-btn" data-category="art">🎨 Art</button>
+            <button class="cat-btn" data-category="geographie">🗺️ Géographie</button>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <h2 class="setup-label">Difficulté</h2>
+          <div class="diff-row">
+            <button class="diff-btn" data-difficulty="easy">Facile</button>
+            <button class="diff-btn active" data-difficulty="medium">Moyen</button>
+            <button class="diff-btn" data-difficulty="hard">Difficile</button>
+          </div>
+        </div>
+
+        <button id="play-random-btn" class="btn-primary">Jouer ! 🥭</button>
+
+        <div class="custom-divider"><span>ou donne un mot à deviner à un ami</span></div>
+
+        <div class="custom-section">
+          <div class="custom-input-row">
+            <input type="text" id="custom-word-input" placeholder="Écris un mot..." maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+            <button id="play-custom-btn" class="btn-secondary">Valider le mot</button>
+          </div>
+          <p id="custom-word-error" class="error-text"></p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PASS DEVICE SCREEN ════════════════════════════════════════════ -->
+  <div id="pass-screen" class="hidden">
+    <div class="pass-card">
+      <div class="pass-icon">🤫</div>
+      <h2>Mot validé !</h2>
+      <p>Passe l'appareil à l'autre joueur sans lui montrer l'écran.</p>
+      <button id="ready-btn" class="btn-primary">Je suis prêt à jouer !</button>
+    </div>
+  </div>
+
+  <!-- ══ GAME SCREEN ═══════════════════════════════════════════════════ -->
+  <div id="game-screen" class="hidden">
+
+    <div class="game-card">
+
+      <div id="game-card-header">
+        <button id="menu-btn" class="btn-menu">← Menu</button>
+        <div id="category-hint"></div>
+        <div id="timer-display">0:00</div>
+      </div>
+
+      <div id="game-layout">
+
+        <div id="game-top">
+
+          <!-- Left: comic panel image -->
+          <div id="mango-panel">
+            <div id="panel-container">
+              <img id="panel-img" src="../assets/panel-0.png" alt="Panneau du jeu" />
+              <div id="panel-flash"></div>
+            </div>
+          </div>
+
+          <!-- Right: word tiles + lives -->
+          <div id="word-column">
+            <div id="word-display" aria-label="Mot à deviner" aria-live="polite"></div>
+            <div id="lives-strip">
+              <div id="life-slots"></div>
+              <div id="lives-label"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Full-width keyboard -->
+        <div id="keyboard" role="group" aria-label="Clavier de lettres"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ══ RESULT MODAL ══════════════════════════════════════════════════ -->
+  <div id="result-modal" class="hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div id="modal-header">
+        <div id="modal-title"></div>
+      </div>
+      <div id="modal-panel" class="hidden">
+        <img id="modal-panel-img" src="../assets/panel-win-1.png" alt="Fin du jeu" />
+      </div>
+      <div class="modal-body">
+        <div id="modal-word-reveal"></div>
+        <div id="modal-stats" class="hidden"></div>
+        <button id="modal-share" class="btn-secondary hidden">Partager le résultat 🥭</button>
+        <button id="modal-play-again" class="btn-primary"></button>
+        <button id="modal-new-game" class="btn-secondary">Changer de catégorie</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════════ -->
+  <footer>
+    <a href="https://sillygameslab.com" target="_blank" rel="noopener">A Silly Games Lab production.</a>
+    &nbsp;·&nbsp;
+    <a href="../privacy.html">Confidentialité</a>
+  </footer>
+
+  <!-- ══ HOW TO PLAY (SEO) ════════════════════════════════════════════ -->
+  <section id="how-to-play" aria-hidden="true">
+    <h2>Comment jouer à Hangmango — Jeu de Devinettes Gratuit</h2>
+    <p>Hangmango est un jeu de devinettes de mots gratuit — une alternative moderne et amusante au classique jeu du pendu. Devine les mots cachés lettre par lettre dans sept catégories : Animaux, Nourriture, Sports, Pays, Sciences, Art et Géographie. Sans téléchargement, sans inscription — joue directement dans ton navigateur sur mobile, tablette ou ordinateur.</p>
+    <h3>Règles du jeu</h3>
+    <p>Un mot est choisi aléatoirement dans la catégorie et le niveau de difficulté sélectionnés. Le mot apparaît sous forme de cases vides, une par lettre. Clique sur une lettre du clavier (ou tape sur ton clavier physique) pour faire une proposition. Si la lettre est dans le mot, elle s'affiche dans la bonne position. Si elle n'y est pas, la mangue se rapproche du sol — tu disposes de 8 erreurs avant qu'elle s'écrase ! Devine le mot complet avant la chute pour gagner.</p>
+    <h3>Mode mot personnalisé</h3>
+    <p>Tu peux entrer ton propre mot dans la zone "donne un mot à deviner à un ami". Passe ensuite l'appareil à l'autre joueur et laisse-le deviner — idéal pour les soirées, les salles de classe ou apprendre du vocabulaire dans une nouvelle langue.</p>
+    <h3>Conseils</h3>
+    <p>Commence par les voyelles les plus courantes : E, A, I, O, U. Ensuite essaie les consonnes fréquentes comme S, T, R et N. Utilise l'indice de catégorie pour orienter tes propositions — un animal de huit lettres est probablement quelque chose d'exotique ! Pour la catégorie Art, pense aux grands mouvements artistiques français comme l'impressionnisme ou le surréalisme.</p>
+    <h3>À propos de Hangmango</h3>
+    <p>Hangmango est entièrement gratuit, sans connexion ni téléchargement requis. C'est une alternative ludique et adaptée à tous les âges au jeu du pendu traditionnel — la mangue remplace le bonhomme pendu pour une expérience plus légère et colorée. Fabriqué par Silly Games Lab — le studio de jeux de navigateur rapides et amusants. Joue au pendu en ligne gratuit, deviner des mots n'a jamais été aussi amusant !</p>
+  </section>
+
+</div><!-- #app -->
+
+<script src="../words_fr.js?v=001"></script>
+<script src="game_fr.js?v=001"></script>
+</body>
+</html>
