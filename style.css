@@ -22,9 +22,9 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--ink);
-  background-image: radial-gradient(circle, #333 1px, transparent 1px);
-  background-size: 12px 12px;
+  background-color: var(--white);
+  background-image: radial-gradient(circle, #c8c8c8 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
   color: var(--ink);
   min-height: 100vh;
   display: flex;
@@ -63,7 +63,7 @@ body {
 
 /* Orange title panel — bleeds to card edges */
 .logo-panel {
-  background: var(--mango);
+  background: linear-gradient(150deg, #FFD166 0%, #F5A623 55%, #E8722A 100%);
   border-bottom: 3px solid var(--ink);
   padding: 28px 28px 22px;
   display: flex;
@@ -154,7 +154,7 @@ body {
 }
 
 .cat-btn.active {
-  background: var(--mango);
+  background: linear-gradient(150deg, #FFD166 0%, #F5A623 55%, #E8722A 100%);
   color: var(--ink);
 }
 
@@ -187,7 +187,7 @@ body {
 }
 
 .diff-btn.active {
-  background: var(--mango);
+  background: linear-gradient(150deg, #FFD166 0%, #F5A623 55%, #E8722A 100%);
   color: var(--ink);
 }
 
@@ -197,7 +197,7 @@ body {
   font-size: 1.5rem;
   letter-spacing: 0.06em;
   padding: 14px 28px;
-  background: var(--mango);
+  background: linear-gradient(150deg, #FFD166 0%, #F5A623 55%, #E8722A 100%);
   color: var(--ink);
   border: 3px solid var(--ink);
   border-radius: var(--radius);
@@ -864,11 +864,11 @@ footer {
   font-family: var(--font-head);
   font-size: 0.85rem;
   letter-spacing: 0.04em;
-  color: rgba(255,251,240,0.35);
+  color: rgba(0,0,0,0.3);
 }
 
 footer a {
-  color: rgba(255,251,240,0.35);
+  color: rgba(0,0,0,0.3);
   text-decoration: none;
 }
 
@@ -885,7 +885,6 @@ footer a:hover { color: var(--mango); }
   box-shadow: 5px 5px 0 var(--ink);
   border-radius: var(--radius);
   padding: 24px 28px;
-  opacity: 0.6;
 }
 
 #how-to-play h2 {
