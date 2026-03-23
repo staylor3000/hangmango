@@ -925,3 +925,37 @@ footer a:hover { color: var(--mango); }
   .kb-row     { max-width: 420px; }
   .key        { height: 44px; font-size: 1.05rem; }
 }
+
+/* ── Language switcher ────────────────────────────────────────────────── */
+#lang-switcher {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 4px;
+  z-index: 999;
+}
+
+.lang-btn {
+  font-family: 'Bangers', cursive;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  padding: 5px 12px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  line-height: 1.5;
+  cursor: pointer;
+  transition: none;
+}
+
+.lang-btn.active {
+  background: linear-gradient(150deg, #FFD166 0%, #F5A623 55%, #E8722A 100%);
+}
+
+.lang-btn:hover:not(.active) {
+  background: #ede8d8;
+}
