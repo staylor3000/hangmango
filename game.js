@@ -457,11 +457,13 @@ let pendingCustomWord = '';
 // ── Preload all panel images so swaps are instant on mobile ────────────
 function preloadPanels() {
   const load = src => { const img = new Image(); img.src = src; };
-  for (let n = 0; n <= MAX_WRONG; n++) load(`assets/panel-${n}.png`);
+  // Win/lose panels first — shown in modal at game end, prioritise caching
   for (let n = 1; n <= 3; n++) {
     load(`assets/panel-win-${n}.png`);
     load(`assets/panel-lose-${n}.png`);
   }
+  // Gameplay panels (shown progressively, more time to load)
+  for (let n = 0; n <= MAX_WRONG; n++) load(`assets/panel-${n}.png`);
 }
 
 document.addEventListener('DOMContentLoaded', () => { initSetup(); preloadPanels(); });
