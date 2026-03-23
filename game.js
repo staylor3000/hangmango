@@ -454,4 +454,14 @@ function initSetup() {
 
 let pendingCustomWord = '';
 
-document.addEventListener('DOMContentLoaded', initSetup);
+// ── Preload all panel images so swaps are instant on mobile ────────────
+function preloadPanels() {
+  const load = src => { const img = new Image(); img.src = src; };
+  for (let n = 0; n <= MAX_WRONG; n++) load(`assets/panel-${n}.png`);
+  for (let n = 1; n <= 3; n++) {
+    load(`assets/panel-win-${n}.png`);
+    load(`assets/panel-lose-${n}.png`);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => { initSetup(); preloadPanels(); });
