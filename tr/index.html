@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,10 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
 
-  <title>hangmango — Free Word Guessing Game Online | Hangman Alternative</title>
-  <meta name="description" content="hangmango is a free, child-friendly word guessing game — the fun hangman alternative. Guess letters to reveal the hidden word before the mango drops! No login needed." />
-  <link rel="canonical" href="https://hangmango.net/" />
+  <title>Hangmango — Ücretsiz Türkçe Kelime Oyunu | Adam Asmaca Alternatifi</title>
+  <meta name="description" content="Hangmango'yu ücretsiz oyna — modern ve eğlenceli Türkçe kelime tahmin oyunu. Adam asmaca alternatifi. Mango düşmeden kelimeyi tahmin et! Giriş yok, indirme yok." />
+  <link rel="canonical" href="https://hangmango.net/tr/" />
+
   <link rel="alternate" hreflang="en" href="https://hangmango.net/" />
   <link rel="alternate" hreflang="es-419" href="https://hangmango.net/es/" />
   <link rel="alternate" hreflang="fr" href="https://hangmango.net/fr/" />
@@ -19,15 +20,15 @@
   <link rel="alternate" hreflang="cy" href="https://hangmango.net/cy/" />
   <link rel="alternate" hreflang="tr" href="https://hangmango.net/tr/" />
   <link rel="alternate" hreflang="x-default" href="https://hangmango.net/" />
-  <meta name="google-site-verification" content="4gf8b2BwilJZqCJsZfLj6MzN2QqcL2EikKA5Azt48HM" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "GameApplication",
     "name": "hangmango",
-    "description": "A free, child-friendly word guessing game — the fun modern hangman alternative. Guess letters to reveal the hidden word before the mango drops!",
-    "url": "https://hangmango.net",
+    "description": "Ücretsiz Türkçe kelime tahmin oyunu — modern ve eğlenceli adam asmaca alternatifi. Gizli kelimeyi harfleri tahmin ederek bul, mango düşmeden önce!",
+    "url": "https://hangmango.net/tr/",
+    "inLanguage": "tr",
     "genre": "Word Game",
     "playMode": "SinglePlayer",
     "applicationCategory": "Game",
@@ -35,18 +36,18 @@
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "GBP"
+      "priceCurrency": "TRY"
     }
   }
   </script>
 
-  <meta property="og:title" content="hangmango — Can you guess the word? 🥭" />
-  <meta property="og:description" content="Free word guessing game. Pick a category, guess letters, save the mango! No login, no download." />
-  <meta property="og:url" content="https://hangmango.net" />
+  <meta property="og:title" content="hangmango — Kelimeyi tahmin edebilir misin? 🥭" />
+  <meta property="og:description" content="Ücretsiz kelime tahmin oyunu. Kategori seç, harf tahmin et, mangoyu kurtar! Giriş yok, indirme yok." />
+  <meta property="og:url" content="https://hangmango.net/tr/" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="hangmango — Can you guess the word? 🥭" />
-  <meta name="twitter:description" content="Free word guessing game. Pick a category, guess letters, save the mango!" />
+  <meta name="twitter:title" content="hangmango — Kelimeyi tahmin edebilir misin? 🥭" />
+  <meta name="twitter:description" content="Ücretsiz kelime tahmin oyunu. Kategori seç, harf tahmin et, mangoyu kurtar!" />
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1852825669034773"
        crossorigin="anonymous"></script>
@@ -54,7 +55,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" />
-  <link rel="stylesheet" href="style.css?v=016" />
+  <link rel="stylesheet" href="../style.css?v=016" />
 </head>
 <body>
 
@@ -64,11 +65,11 @@
   <div id="lang-switcher">
     <a href="https://hangmango.net/cy/" class="lang-btn">🏴󠁧󠁢󠁷󠁬󠁳󠁿 CY</a>
     <a href="https://hangmango.net/de/" class="lang-btn">🇩🇪 DE</a>
-    <a href="https://hangmango.net/" class="lang-btn active">🇬🇧 EN</a>
+    <a href="https://hangmango.net/" class="lang-btn">🇬🇧 EN</a>
     <a href="https://hangmango.net/es/" class="lang-btn">🇲🇽 ES</a>
     <a href="https://hangmango.net/fr/" class="lang-btn">🇫🇷 FR</a>
     <a href="https://hangmango.net/pt/" class="lang-btn">🇧🇷 PT</a>
-    <a href="https://hangmango.net/tr/" class="lang-btn">🇹🇷 TR</a>
+    <a href="https://hangmango.net/tr/" class="lang-btn active">🇹🇷 TR</a>
   </div>
 
   <!-- ══ SETUP SCREEN ══════════════════════════════════════════════════ -->
@@ -80,48 +81,42 @@
           <span class="logo-mango">🥭</span>
           <h1>hang<span>mango</span></h1>
         </div>
-        <p class="tagline">Guess the word before the mango drops!</p>
+        <p class="tagline">Mango düşmeden kelimeyi tahmin et!</p>
       </div>
 
       <div class="setup-content">
 
         <div class="setup-section">
-          <h2 class="setup-label">Category</h2>
+          <h2 class="setup-label">Kategori</h2>
           <div class="cat-grid">
-            <button class="cat-btn active" data-category="animals">🐾 Animals</button>
-            <button class="cat-btn" data-category="art">🎨 Art</button>
-            <button class="cat-btn" data-category="cities">🏙️ Cities</button>
-            <button class="cat-btn" data-category="countries">🌍 Countries</button>
-            <button class="cat-btn" data-category="food">🍕 Food</button>
-            <button class="cat-btn" data-category="history">📜 History</button>
-            <button class="cat-btn" data-category="literature">📚 Literature</button>
-            <button class="cat-btn" data-category="movies">🎬 Movies</button>
-            <button class="cat-btn" data-category="music">🎵 Music</button>
-            <button class="cat-btn" data-category="mythology">🏛️ Mythology</button>
-            <button class="cat-btn" data-category="nature">🌿 Nature</button>
-            <button class="cat-btn" data-category="science">🔬 Science</button>
-            <button class="cat-btn" data-category="sports">⚽ Sports</button>
-            <button class="cat-btn" data-category="technology">💻 Technology</button>
+            <button class="cat-btn active" data-category="hayvanlar">🐾 Hayvanlar</button>
+            <button class="cat-btn" data-category="bilim">🔬 Bilim</button>
+            <button class="cat-btn" data-category="coğrafya">🗺️ Coğrafya</button>
+            <button class="cat-btn" data-category="müzik">🎵 Müzik</button>
+            <button class="cat-btn" data-category="sanat">🎨 Sanat</button>
+            <button class="cat-btn" data-category="spor">⚽ Spor</button>
+            <button class="cat-btn" data-category="ülkeler">🌍 Ülkeler</button>
+            <button class="cat-btn" data-category="yiyecek">🍕 Yiyecek</button>
           </div>
         </div>
 
         <div class="setup-section">
-          <h2 class="setup-label">Difficulty</h2>
+          <h2 class="setup-label">Zorluk</h2>
           <div class="diff-row">
-            <button class="diff-btn" data-difficulty="easy">Easy</button>
-            <button class="diff-btn active" data-difficulty="medium">Medium</button>
-            <button class="diff-btn" data-difficulty="hard">Hard</button>
+            <button class="diff-btn" data-difficulty="easy">Kolay</button>
+            <button class="diff-btn active" data-difficulty="medium">Orta</button>
+            <button class="diff-btn" data-difficulty="hard">Zor</button>
           </div>
         </div>
 
-        <button id="play-random-btn" class="btn-primary">Play! 🥭</button>
+        <button id="play-random-btn" class="btn-primary">Oyna! 🥭</button>
 
-        <div class="custom-divider"><span>or give a friend a word to guess</span></div>
+        <div class="custom-divider"><span>ya da bir arkadaşına tahmin ettirmek için kelime gir</span></div>
 
         <div class="custom-section">
           <div class="custom-input-row">
-            <input type="text" id="custom-word-input" placeholder="Type a word..." maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
-            <button id="play-custom-btn" class="btn-secondary">Set word</button>
+            <input type="text" id="custom-word-input" placeholder="Kelime yaz..." maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+            <button id="play-custom-btn" class="btn-secondary">Kelimeyi ayarla</button>
           </div>
           <p id="custom-word-error" class="error-text"></p>
         </div>
@@ -135,9 +130,9 @@
   <div id="pass-screen" class="hidden">
     <div class="pass-card">
       <div class="pass-icon">🤫</div>
-      <h2>Word set!</h2>
-      <p>Pass the device to the other player — don't let them see the screen.</p>
-      <button id="ready-btn" class="btn-primary">I'm ready to play!</button>
+      <h2>Kelime ayarlandı!</h2>
+      <p>Ekranı göstermeden cihazı diğer oyuncuya ver.</p>
+      <button id="ready-btn" class="btn-primary">Oynamaya hazırım!</button>
     </div>
   </div>
 
@@ -147,7 +142,7 @@
     <div class="game-card">
 
       <div id="game-card-header">
-        <button id="menu-btn" class="btn-menu">← Menu</button>
+        <button id="menu-btn" class="btn-menu">← Menü</button>
         <div id="category-hint"></div>
         <div id="timer-display">0:00</div>
       </div>
@@ -159,14 +154,14 @@
           <!-- Left: comic panel image -->
           <div id="mango-panel">
             <div id="panel-container">
-              <img id="panel-img" src="assets/panel-0.png" alt="Game panel" />
+              <img id="panel-img" src="../assets/panel-0.png" alt="Oyun paneli" />
               <div id="panel-flash"></div>
             </div>
           </div>
 
           <!-- Right: word tiles + lives -->
           <div id="word-column">
-            <div id="word-display" aria-label="Word to guess" aria-live="polite"></div>
+            <div id="word-display" aria-label="Tahmin edilecek kelime" aria-live="polite"></div>
             <div id="lives-strip">
               <div id="life-slots"></div>
               <div id="lives-label"></div>
@@ -176,7 +171,7 @@
         </div>
 
         <!-- Full-width keyboard -->
-        <div id="keyboard" role="group" aria-label="Letter keyboard"></div>
+        <div id="keyboard" role="group" aria-label="Harf klavyesi"></div>
 
       </div>
 
@@ -192,14 +187,14 @@
         <div id="modal-title"></div>
       </div>
       <div id="modal-panel" class="hidden">
-        <img id="modal-panel-img" src="assets/panel-win-1.png" alt="Game over" />
+        <img id="modal-panel-img" src="../assets/panel-win-1.png" alt="Oyun sonu" />
       </div>
       <div class="modal-body">
         <div id="modal-word-reveal"></div>
         <div id="modal-stats" class="hidden"></div>
-        <button id="modal-share" class="btn-secondary hidden">Share result 🥭</button>
+        <button id="modal-share" class="btn-secondary hidden">Sonucu paylaş 🥭</button>
         <button id="modal-play-again" class="btn-primary"></button>
-        <button id="modal-new-game" class="btn-secondary">Change category</button>
+        <button id="modal-new-game" class="btn-secondary">Kategori değiştir</button>
       </div>
     </div>
   </div>
@@ -208,26 +203,26 @@
   <footer>
     <a href="https://sillygameslab.com" target="_blank" rel="noopener">A Silly Games Lab production.</a>
     &nbsp;·&nbsp;
-    <a href="privacy.html">Privacy</a>
+    <a href="../privacy.html">Gizlilik</a>
   </footer>
 
   <!-- ══ HOW TO PLAY (SEO) ════════════════════════════════════════════ -->
   <section id="how-to-play" aria-hidden="true">
-    <h2>How to Play hangmango — Free Hangman Alternative</h2>
-    <p>hangmango is a free online word guessing game — a modern, child-friendly alternative to the classic hangman game. Guess hidden words one letter at a time across fourteen categories: Animals, Art, Cities, Countries, Food, History, Literature, Movies, Music, Mythology, Nature, Science, Sports, and Technology.</p>
-    <h3>Game rules</h3>
-    <p>A random word is chosen from your selected category and difficulty. The word appears as a row of blank tiles. Click a letter on the keyboard (or press a key) to guess. Correct guesses reveal the letter in the word. Wrong guesses advance the mango animation — the branch shakes, the mango loosens, falls, bounces, and finally goes splat! You get 8 wrong guesses before the mango drops.</p>
-    <h3>Custom word mode</h3>
-    <p>Type your own word in the "give a friend a word to guess" box. Pass the device to another player and let them guess your word — great for parties or classrooms.</p>
-    <h3>Tips</h3>
-    <p>Start with common vowels like E, A, and O. Then try frequent consonants like S, T, R, and N. Use the category hint to guide your guesses — an animal word with lots of letters is probably something exotic!</p>
-    <h3>About hangmango</h3>
-    <p>hangmango is completely free to play with no login or download required. It works on mobile, tablet, and desktop. Made by Silly Games Lab — the home of quick, fun browser games.</p>
+    <h2>Hangmango Nasıl Oynanır — Ücretsiz Türkçe Kelime Oyunu</h2>
+    <p>Hangmango tamamen ücretsiz bir çevrimiçi kelime tahmin oyunu — klasik adam asmaca oyununun modern ve çocuk dostu alternatifi. Sekiz kategori arasından harf harf gizli kelimeleri tahmin et: Hayvanlar, Bilim, Coğrafya, Müzik, Sanat, Spor, Ülkeler ve Yiyecek. İndirme yok, giriş yok — telefon, tablet veya bilgisayarda tarayıcıdan direkt oyna.</p>
+    <h3>Oyun kuralları</h3>
+    <p>Seçtiğin kategori ve zorluk seviyesinden rastgele bir kelime seçilir. Kelime, her harf için bir boş kutu olacak şekilde görünür. Bir harf tahmin etmek için klavyedeki (ya da fiziksel klavyendeki) bir tuşa bas. Harf kelimede varsa doğru konumda belirir. Yoksa mango biraz daha düşer — mango yere çarpmadan önce 8 yanlış tahmin hakkın var! Mangonun düşmesinden önce kelimeyi tam olarak tahmin etmeyi başarırsan kazanırsın.</p>
+    <h3>Özel kelime modu</h3>
+    <p>"Bir arkadaşına tahmin ettirmek için kelime gir" kutusuna kendi kelimeni yazabilirsin. Cihazı diğer oyuncuya ver ve kelimenin tahmin edilmesini izle — partiler, sınıflar veya kelime dağarcığı geliştirmek için harika!</p>
+    <h3>İpuçları</h3>
+    <p>Türkçe'nin en sık kullanılan sesli harfleriyle başla: A, E, I, İ, O, Ö, U, Ü. Ardından S, R, N, L, K gibi yaygın ünsüzleri dene. Tahminlerini yönlendirmek için kategori ipucunu kullan — çok harfli bir hayvan kelimesi muhtemelen egzotik bir şey! Ülkeler kategorisinde Türkiye'nin komşularını ve büyük ülkeleri düşün. Yiyecek kategorisinde geleneksel Türk mutfağını aklında tut.</p>
+    <h3>Hangmango Hakkında</h3>
+    <p>Hangmango tamamen ücretsiz; giriş veya indirme gerektirmez. Klasik adam asmaca oyununun eğlenceli ve tüm yaşlara uygun bir alternatifidir — ipi tutan adam yerine mango var! Silly Games Lab tarafından yapılmıştır — hızlı ve eğlenceli tarayıcı oyunlarının evi. Ücretsiz Türkçe kelime oyununu çevrimiçi oyna!</p>
   </section>
 
 </div><!-- #app -->
 
-<script src="words.js?v=002"></script>
-<script src="game.js?v=001"></script>
+<script src="../words_tr.js?v=001"></script>
+<script src="game_tr.js?v=001"></script>
 </body>
 </html>
