@@ -83,9 +83,8 @@ const wordsEn = {
       "apocalypse now", "mulholland drive", "eternal sunshine",
       "there will be blood", "no country for old men",
       "the shawshank redemption", "schindlers list",
-      "pans labyrinth", "city of god", "spirited away",
-      "blade runner", "a space odyssey",
-      "the grand budapest hotel", "barton fink", "fargo"
+      "city of god", "spirited away",
+      "blade runner", "the grand budapest hotel", "barton fink", "fargo"
     ]
   },
   science: {
@@ -259,10 +258,10 @@ const CATEGORY_META = {
   movies:     { icon: '🎬', label: 'Movies' },
   science:    { icon: '🔬', label: 'Science' },
   music:      { icon: '🎵', label: 'Music' },
-  mythology:  { icon: '⚡', label: 'Mythology' },
+  mythology:  { icon: '🏛️', label: 'Mythology' },
   nature:     { icon: '🌿', label: 'Nature' },
   art:        { icon: '🎨', label: 'Art' },
-  literature: { icon: '📖', label: 'Literature' },
+  literature: { icon: '📚', label: 'Literature' },
   cities:     { icon: '🏙️', label: 'Cities' },
   technology: { icon: '💻', label: 'Technology' },
   history:    { icon: '📜', label: 'History' }

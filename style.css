@@ -1,4 +1,4 @@
-/* hangmango — styles v=015 */
+/* hangmango — styles v=016 */
 
 /* ── Variables ─────────────────────────────────────────────────────── */
 :root {
@@ -131,7 +131,7 @@ body {
 }
 
 .cat-btn {
-  flex: 0 0 calc(33.333% - 6px);
+  flex: 0 0 calc(50% - 4px);
   font-family: var(--font-head);
   font-size: 0.95rem;
   letter-spacing: 0.03em;
@@ -158,6 +158,14 @@ body {
 .cat-btn.active {
   background: linear-gradient(150deg, #FFD166 0%, #F5A623 55%, #E8722A 100%);
   color: var(--ink);
+}
+
+@media (min-width: 480px) {
+  .cat-btn { flex: 0 0 calc(33.333% - 6px); }
+}
+
+@media (min-width: 768px) {
+  .cat-btn { flex: 0 0 calc(25% - 6px); }
 }
 
 /* Difficulty row */
