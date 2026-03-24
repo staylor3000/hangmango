@@ -132,10 +132,15 @@ body {
 
 .cat-btn {
   flex: 0 0 calc(50% - 4px);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   font-family: var(--font-head);
   font-size: 0.95rem;
   letter-spacing: 0.03em;
-  padding: 10px 6px;
+  padding: 0 6px;
   background: var(--paper);
   color: var(--ink);
   border: 2px solid var(--ink);
