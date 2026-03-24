@@ -46,7 +46,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 0 16px 40px;
+  padding: 0 16px 16px;
 }
 
 .setup-card {
@@ -363,7 +363,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 24px 16px 40px;
+  padding: 0 16px 16px;
 }
 
 .game-card {
@@ -875,7 +875,7 @@ body {
 /* ── Footer ─────────────────────────────────────────────────────────── */
 footer {
   text-align: center;
-  padding: 20px 16px;
+  padding: 10px 16px;
   font-family: var(--font-head);
   font-size: 0.85rem;
   letter-spacing: 0.04em;
@@ -944,23 +944,33 @@ footer a:hover { color: var(--mango); }
 /* ── Language switcher ────────────────────────────────────────────────── */
 #lang-switcher {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
-  padding: 12px 0;
+  gap: 5px;
+  padding: 10px 8px;
+}
+
+@media (max-width: 600px) {
+  .lang-btn {
+    flex: 0 0 calc(25% - 4px);
+  }
 }
 
 .lang-btn {
   font-family: 'Bangers', cursive;
-  font-size: 1rem;
+  font-size: 0.8rem;
   letter-spacing: 0.04em;
-  padding: 5px 12px;
+  padding: 3px 7px;
   background: var(--paper);
   border: 2px solid var(--ink);
   box-shadow: 2px 2px 0 var(--ink);
   border-radius: 3px;
   text-decoration: none;
   color: var(--ink);
-  line-height: 1.5;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: none;
 }
