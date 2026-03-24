@@ -24,19 +24,30 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "GameApplication",
-    "name": "hangmango",
-    "description": "Ein kostenloses Wortratespiel — eine moderne und lustige Alternative zum klassischen Galgenmännchen. Errate die Buchstaben um das versteckte Wort zu enthüllen bevor die Mango fällt!",
+    "@type": ["WebApplication", "VideoGame"],
+    "name": "Hangmango",
+    "description": "Hangmango ist ein kostenloses Online-Wortratespiel — eine moderne, kinderfreundliche Alternative zum klassischen Galgenmännchen. Verfügbar in 7 Sprachen mit verschiedenen Kategorien und Schwierigkeitsgraden.",
     "url": "https://hangmango.net/de/",
+    "applicationCategory": "GameApplication",
+    "gamePlatform": "Web Browser",
+    "genre": ["Word Game", "Puzzle", "Educational"],
     "inLanguage": "de",
-    "genre": "Word Game",
-    "playMode": "SinglePlayer",
-    "applicationCategory": "Game",
-    "operatingSystem": "Web Browser",
+    "isAccessibleForFree": true,
+    "operatingSystem": "Any",
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "EUR"
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Silly Games Lab",
+      "url": "https://sillygameslab.com"
+    },
+    "numberOfPlayers": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 2
     }
   }
   </script>
@@ -54,7 +65,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=optional" />
   <link rel="stylesheet" href="../style.css?v=017" />
 </head>
 <body>
@@ -154,7 +165,7 @@
           <!-- Left: comic panel image -->
           <div id="mango-panel">
             <div id="panel-container">
-              <img id="panel-img" src="../assets/panel-0.png" alt="Spielfeld" />
+              <img id="panel-img" src="../assets/panel-0.png" alt="Spielfeld" fetchpriority="high" loading="eager" width="1024" height="1024" />
               <div id="panel-flash"></div>
             </div>
           </div>
@@ -187,7 +198,7 @@
         <div id="modal-title"></div>
       </div>
       <div id="modal-panel" class="hidden">
-        <img id="modal-panel-img" src="../assets/panel-win-1.png" alt="Spielende" />
+        <img id="modal-panel-img" src="../assets/panel-win-1.png" alt="Spielende" width="1024" height="1024" />
       </div>
       <div class="modal-body">
         <div id="modal-word-reveal"></div>

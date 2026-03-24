@@ -24,19 +24,30 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "GameApplication",
-    "name": "hangmango",
-    "description": "Gêm ddyfalu geiriau am ddim — dewis arall modern a hwylus i'r gêm crog glasurol. Dyfalwch y llythrennau i ddatgelu'r gair cudd cyn i'r mango ddisgyn!",
+    "@type": ["WebApplication", "VideoGame"],
+    "name": "Hangmango",
+    "description": "Mae Hangmango yn gêm eiriau ar-lein am ddim — dewis arall modern a hwylus i'r gêm crog glasurol. Ar gael mewn 7 iaith gyda sawl categori a lefel anhawster.",
     "url": "https://hangmango.net/cy/",
+    "applicationCategory": "GameApplication",
+    "gamePlatform": "Web Browser",
+    "genre": ["Word Game", "Puzzle", "Educational"],
     "inLanguage": "cy",
-    "genre": "Word Game",
-    "playMode": "SinglePlayer",
-    "applicationCategory": "Game",
-    "operatingSystem": "Web Browser",
+    "isAccessibleForFree": true,
+    "operatingSystem": "Any",
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "GBP"
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Silly Games Lab",
+      "url": "https://sillygameslab.com"
+    },
+    "numberOfPlayers": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 2
     }
   }
   </script>
@@ -54,7 +65,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=optional" />
   <link rel="stylesheet" href="../style.css?v=017" />
 </head>
 <body>
@@ -153,7 +164,7 @@
           <!-- Left: comic panel image -->
           <div id="mango-panel">
             <div id="panel-container">
-              <img id="panel-img" src="../assets/panel-0.png" alt="Panel y gêm" />
+              <img id="panel-img" src="../assets/panel-0.png" alt="Panel y gêm" fetchpriority="high" loading="eager" width="1024" height="1024" />
               <div id="panel-flash"></div>
             </div>
           </div>
@@ -186,7 +197,7 @@
         <div id="modal-title"></div>
       </div>
       <div id="modal-panel" class="hidden">
-        <img id="modal-panel-img" src="../assets/panel-win-1.png" alt="Diwedd y gêm" />
+        <img id="modal-panel-img" src="../assets/panel-win-1.png" alt="Diwedd y gêm" width="1024" height="1024" />
       </div>
       <div class="modal-body">
         <div id="modal-word-reveal"></div>
