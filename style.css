@@ -948,8 +948,12 @@ footer a:hover { color: var(--mango); }
   justify-content: center;
   gap: 5px;
   padding: 10px 8px;
-  max-width: 320px;
-  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .lang-btn {
+    flex: 0 0 calc(25% - 4px);
+  }
 }
 
 .lang-btn {
