@@ -385,7 +385,6 @@ body {
   justify-content: space-between;
   gap: 10px;
   padding: 10px 14px;
-  border-bottom: 3px solid var(--ink);
   background: var(--paper);
 }
 
@@ -459,14 +458,12 @@ body {
   align-items: stretch;
   gap: 0;
   width: 100%;
-  border-bottom: 3px solid var(--ink);
 }
 
 /* ── Mango panel ───────────────────────────── */
 #mango-panel {
   flex-shrink: 0;
   width: 180px;
-  border-right: 3px solid var(--ink);
   padding: 12px;
   display: flex;
   align-items: center;
@@ -649,15 +646,16 @@ body {
   align-items: center;
 }
 
-/* Each tile is a small comic panel */
+/* Each tile is an underscore */
 .letter-tile {
   flex: 0 1 34px;
   min-width: 16px;
   height: 42px;
-  background: var(--paper);
-  border: 2px solid var(--ink);
-  border-radius: var(--radius);
-  box-shadow: 2px 2px 0 var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid var(--ink);
+  border-radius: 0;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -669,16 +667,13 @@ body {
 }
 
 .letter-tile.revealed {
-  background: var(--white);
   color: var(--red);
   animation: tileReveal 0.3s ease-out;
 }
 
 .letter-tile.missed {
-  background: #ffe5e3;
   color: var(--red);
-  border-color: var(--red);
-  box-shadow: 2px 2px 0 var(--red);
+  border-bottom-color: var(--red);
 }
 
 @keyframes tileReveal {
@@ -930,7 +925,7 @@ footer a:hover { color: var(--mango); }
 /* ── Very narrow phones: stack panel above word display ──────────────── */
 @media (max-width: 340px) {
   #game-top { flex-direction: column; }
-  #mango-panel { width: 100%; border-right: none; border-bottom: 3px solid var(--ink); }
+  #mango-panel { width: 100%; }
   #word-column { width: 100%; }
 }
 
