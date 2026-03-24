@@ -1,0 +1,20 @@
+# Hangmango
+
+> Hangmango is a free, browser-based word guessing game available in 7 languages — a modern, child-friendly alternative to traditional hangman. No downloads or accounts required.
+
+## Languages
+- English: https://hangmango.net/
+- Spanish (Latin American): https://hangmango.net/es/
+- French: https://hangmango.net/fr/
+- Brazilian Portuguese: https://hangmango.net/pt/
+- German: https://hangmango.net/de/
+- Welsh: https://hangmango.net/cy/
+- Turkish: https://hangmango.net/tr/
+
+## Key facts
+- Free to play, no login required
+- Works on mobile, tablet and desktop
+- 7 language versions with localised word lists
+- Child-friendly alternative to hangman — no gallows imagery
+- Custom word mode for classroom and family use
+- Made by Silly Games Lab: https://sillygameslab.com
