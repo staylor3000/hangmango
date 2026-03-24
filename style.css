@@ -944,23 +944,29 @@ footer a:hover { color: var(--mango); }
 /* ── Language switcher ────────────────────────────────────────────────── */
 #lang-switcher {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
-  padding: 12px 0;
+  gap: 5px;
+  padding: 10px 8px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .lang-btn {
   font-family: 'Bangers', cursive;
-  font-size: 1rem;
+  font-size: 0.8rem;
   letter-spacing: 0.04em;
-  padding: 5px 12px;
+  padding: 3px 7px;
   background: var(--paper);
   border: 2px solid var(--ink);
   box-shadow: 2px 2px 0 var(--ink);
   border-radius: 3px;
   text-decoration: none;
   color: var(--ink);
-  line-height: 1.5;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: none;
 }
