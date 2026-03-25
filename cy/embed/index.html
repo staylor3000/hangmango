@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="cy">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <base href="https://hangmango.net/cy/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥭</text></svg>" />
+  <title>Hangmango Embed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="../style.css?v=020" />
+  <style>
+    body { background: white !important; background-image: none !important; }
+    #app { background: white; min-height: 100vh; }
+    .powered-by { position: fixed; bottom: 8px; right: 10px; font-size: 0.7rem; opacity: 0.6; font-family: sans-serif; }
+    .powered-by a { color: #888; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ══ SETUP SCREEN ══════════════════════════════════════════════════ -->
+  <div id="setup-screen">
+    <div class="setup-card">
+      <div class="logo-panel">
+        <div class="setup-logo">
+          <span class="logo-mango">🥭</span>
+          <h1>hang<span>mango</span></h1>
+        </div>
+        <p class="tagline">Dyfalwch y gair cyn i'r mango ddisgyn!</p>
+      </div>
+      <div class="setup-content">
+        <div class="setup-section">
+          <h2 class="setup-label">Categori</h2>
+          <div class="cat-grid">
+            <button class="cat-btn active" data-category="anifeiliaid">🐾 Anifeiliaid</button>
+            <button class="cat-btn" data-category="bwyd">🍕 Bwyd</button>
+            <button class="cat-btn" data-category="cartref">🏠 Cartref</button>
+            <button class="cat-btn" data-category="tywydd">⛅ Tywydd</button>
+            <button class="cat-btn" data-category="cymru">🏴󠁧󠁢󠁷󠁬󠁳󠁿 Cymru</button>
+            <button class="cat-btn" data-category="ysgol">📚 Ysgol</button>
+            <button class="cat-btn" data-category="chwedlau">🐉 Chwedlau</button>
+          </div>
+        </div>
+        <div class="setup-section">
+          <h2 class="setup-label">Anhawster</h2>
+          <div class="diff-row">
+            <button class="diff-btn" data-difficulty="easy">Hawdd</button>
+            <button class="diff-btn active" data-difficulty="medium">Canolig</button>
+            <button class="diff-btn" data-difficulty="hard">Anodd</button>
+          </div>
+        </div>
+        <button id="play-random-btn" class="btn-primary">Chwarae! 🥭</button>
+        <div class="custom-divider"><span>neu rhowch air i ffrind ddyfalu</span></div>
+        <div class="custom-section">
+          <div class="custom-input-row">
+            <input type="text" id="custom-word-input" placeholder="Teipiwch air..." maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+            <button id="play-custom-btn" class="btn-secondary">Gosod gair</button>
+          </div>
+          <p id="custom-word-error" class="error-text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PASS DEVICE SCREEN ════════════════════════════════════════════ -->
+  <div id="pass-screen" class="hidden">
+    <div class="pass-card">
+      <div class="pass-icon">🤫</div>
+      <h2>Gair wedi gosod!</h2>
+      <p>Pasiwch y ddyfais i'r chwaraewr arall.</p>
+      <button id="ready-btn" class="btn-primary">Dw i'n barod i chwarae!</button>
+    </div>
+  </div>
+
+  <!-- ══ GAME SCREEN ═══════════════════════════════════════════════════ -->
+  <div id="game-screen" class="hidden">
+    <div class="game-card">
+      <div id="game-card-header">
+        <button id="menu-btn" class="btn-menu">← Dewislen</button>
+        <div id="category-hint"></div>
+        <div id="timer-display">0:00</div>
+      </div>
+      <div id="game-layout">
+        <div id="game-top">
+          <div id="mango-panel">
+            <div id="panel-container">
+              <img id="panel-img" src="../assets/panel-0.png" alt="Game panel" fetchpriority="high" loading="eager"/>
+              <div id="panel-flash"></div>
+            </div>
+          </div>
+          <div id="word-column">
+            <div id="word-display" aria-label="Gair i'w ddyfalu" aria-live="polite"></div>
+            <div id="lives-strip">
+              <div id="life-slots"></div>
+              <div id="lives-label"></div>
+            </div>
+          </div>
+        </div>
+        <div id="keyboard" role="group" aria-label="Bysellfwrdd llythrennau"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RESULT MODAL ══════════════════════════════════════════════════ -->
+  <div id="result-modal" class="hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div id="modal-header">
+        <div id="modal-title"></div>
+      </div>
+      <div id="modal-panel" class="hidden">
+        <img id="modal-panel-img" src="../assets/panel-win-1.png" alt="Game over"/>
+      </div>
+      <div class="modal-body">
+        <div id="modal-word-reveal"></div>
+        <div id="modal-stats" class="hidden"></div>
+        <button id="modal-share" class="btn-secondary hidden">Rhannu canlyniad 🥭</button>
+        <button id="modal-play-again" class="btn-primary"></button>
+        <button id="modal-new-game" class="btn-secondary">Newid categori</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="powered-by"><a href="https://hangmango.net" target="_blank">Powered by hangmango.net</a></div>
+
+<script src="../words_cy.js?v=001"></script>
+<script src="game_cy.js?v=001"></script>
+</body>
+</html>
